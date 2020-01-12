@@ -1,0 +1,32 @@
+body{
+    background-color: #b8ffa9;;
+}
+
+input.form-control,input.form-control:focus{
+    background-color: #636b7b;
+    color: #fff;
+    border: 1px solid #636b7b;
+    border-radius: 10px;
+
+}
+
+input.form-control:focus{
+    box-shadow: none;
+}
+
+button[type=submit].btn{
+    border-radius: 20px;
+    background-color: #04c582;
+    color: #fff;
+}
+
+div.form-group label:not(.text-danger){
+    color: #545d6a;
+    font-weight: 700;
+}
+
+div.form-group.required>label:first-child:after{
+    content:'*';
+    color: #fff;
+    padding-left: 5px;
+}

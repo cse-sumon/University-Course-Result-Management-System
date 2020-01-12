@@ -7,27 +7,31 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
-import { UserComponent } from './user/user.component';
-import { RegistrationComponent } from './user/registration/registration.component';
+import { TestComponent } from './components/test/test.component';
+import { UserComponent } from './components/user/user.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
 import { UserService } from './shared/user.service';
-import { LoginComponent } from './user/login/login.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
-
-
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     UserComponent,
-    RegistrationComponent,
     LoginComponent,
+    RegistrationComponent,
     HomeComponent,
-    AdminPanelComponent,
+    TestComponent,
+    DashboardComponent,
     ForbiddenComponent
   ],
   imports: [
@@ -41,8 +45,13 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
       progressBar: true
      }
     ),
-    FormsModule
-   
+    FormsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [UserService,{
     provide:HTTP_INTERCEPTORS,
