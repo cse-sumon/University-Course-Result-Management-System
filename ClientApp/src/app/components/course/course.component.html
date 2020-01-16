@@ -1,0 +1,81 @@
+<h4 class="text-center text-primary">Courses List</h4>
+  <div class="row">
+    <div class="col-sm-10">  
+      <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Course">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn" style="background-color:rgb(193, 206, 196)"><i class="fas fa-plus"
+          (click)="onCreate()"> <span style="margin-left: 10px; color:black">Create</span></i></button>
+    </div>
+  </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+    <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="credit">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit </th>
+    <td mat-cell *matCellDef="let element"> {{element.credit}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="departmentName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+    <td mat-cell *matCellDef="let element"> {{element.departmentName}} </td>
+  </ng-container>
+
+   <!-- Symbol Column -->
+   <ng-container matColumnDef="semesterName">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> Semester </th>
+     <td mat-cell *matCellDef="let element"> {{element.semesterName}} </td>
+   </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CreatedAt </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'medium'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" title="Edit" (click)="onEdit(row.id)">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" title="Delete" (click)="onDelete(row.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+<!-- <ng-container matColumnDef="noData">
+  <mat-footer-cell *matFooterCellDef colspan="6">
+    No data.
+  </mat-footer-cell>
+</ng-container>
+  <th mat-header-cell *matHeaderCellDef>  </th>
+  <td mat-row *matRowDef="let row"></td>
+<mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+<mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+</mat-footer-row> -->
+
+</table>
+
+<mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

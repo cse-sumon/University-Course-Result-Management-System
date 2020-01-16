@@ -22,6 +22,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MaterialsModule} from './materials/materials.module';
+import { CourseComponent } from './components/course/course.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { AddCourseComponent } from './components/course/add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,9 @@ import { MatListModule } from '@angular/material/list';
     HomeComponent,
     TestComponent,
     DashboardComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    CourseComponent,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -51,13 +59,18 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MaterialsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [UserService,{
     provide:HTTP_INTERCEPTORS,
     useClass:AuthInterceptor,
     multi:true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddCourseComponent]
 })
 export class AppModule { }

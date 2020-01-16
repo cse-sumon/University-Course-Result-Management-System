@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  readonly BaseURI = 'https://localhost:44327/api';
+  readonly BaseURI = environment.baseUrl;
 
   constructor(private fb:FormBuilder, private http:HttpClient) { }
 
@@ -50,7 +50,7 @@ export class UserService {
   }
 
   getUserProfile(){
-    return this.http.get(this.BaseURI+'/UserProfile');
+    return this.http.get(this.BaseURI +'/Semester');
   }
   
   roleMatch(allowedRoles): boolean {
