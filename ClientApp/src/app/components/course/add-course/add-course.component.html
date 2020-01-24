@@ -1,79 +1,63 @@
-<div class="row">
-  <div class="col-sm-11">
-    {{courseService.formTitle}}
-  </div>
+<div class="row alert alert-dark">
+  <div class="col-sm-11">{{courseService.formTitle}}</div>
   <div class="col-sm-1">
     <mat-icon [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
   </div>
 </div>
-<form [formGroup]="courseService.courseForm" class="normal-form" (submit)="onSubmit()">
-  <mat-grid-list cols="2" rowHeight="300px">
-    <mat-grid-tile>
-      <div class="controles-container">
-        <!-- <input type="hidden" formControlName="$key"> -->
-        <mat-form-field class="example-full-width">
-          <input formControlName="code" matInput placeholder="Code*">
-          <mat-error *ngIf="courseService.courseForm.controls['code'].errors?.required">This field is mandatory.
-          </mat-error>
-          <mat-error *ngIf="courseService.courseForm.controls['code'].errors?.minlength">Minimum length 5 needed.
-          </mat-error>
-        </mat-form-field>
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="hidden" formControlName="id">
+      <label for="code">Code</label>
+      <input type="string" formControlName="code" class="form-control">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="name">Name</label>
+      <input type="name" formControlName="name" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label for="Department">Department</label>
+      <select id="Department" class="form-control" formControlName="departmentId">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="Semester">Semester</label>
+      <select id="Semester" class="form-control" formControlName="semesterId">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="Credit">Credit</label>
+        <input type="text" formCotrolName="Credit" class="form-control">
       </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="controles-container">
-        <mat-form-field class="example-full-width">
-          <input formControlName="name" matInput placeholder="Name*">
-          <mat-error>This field is mandatory.</mat-error>
-        </mat-form-field>
-
+      <div class="form-group col-md-6">
+        <label for="CreatedAt">Created Date</label>
+        <input type="text" class="form-control" formControlName="createdAt">
       </div>
-    </mat-grid-tile>
-    <!-- </mat-grid-list cols="2">
-  <mat-grid-tile>
-    <mat-form-field>
-      <input formControlName="credit" matInput placeholder="Credit*">
-      <mat-error>Invalid email address.</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input formControlName="description" matInput placeholder="Description">
-    </mat-form-field>
 
 
-  </mat-grid-tile>
-  </mat-grid-list> -->
-    <!-- <mat-grid-tile>
-      <div class="controles-container"> -->
-        <!-- <div class="add-bottom-padding">
-          <mat-select formControlName="departmentId*" placeholder="Department">
-            <mat-option value="1">CSE</mat-option>
-            <mat-option value="2">EEE</mat-option>
-            <mat-option value="3">BBA</mat-option>
-          </mat-select>
-        </div> -->
-        <!-- <mat-form-field>
-          <mat-select formControlName="departmentId" placeholder="Department">
-            <mat-option>None</mat-option>
-            <ng-container *ngFor="let department of departmentService.array">
-              <mat-option value="{{department.id}}">{{department.name}}</mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
-         <mat-form-field>
-           <mat-select formControlName="semesterId" placeholder="Semester">
-             <mat-option>None</mat-option>
-             <ng-container *ngFor="let department of departmentService.array">
-               <mat-option value="{{semester.id}}">{{semester.name}}</mat-option>
-             </ng-container>
-           </mat-select>
-         </mat-form-field> -->
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="Description">Description</label>
+      <textarea type="text" class="form-control" formControlName="description" ></textarea>
+    </div>
+  </div>
 
-      <!-- </div>
-    </mat-grid-tile> -->
-  </mat-grid-list>
-  <div class="button-row pull-right">
-    <button mat-raised-button color="primary" type="submit"
-      [disabled]="courseService.courseForm.invalid">{{courseService.buttonName}}</button>
-    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+
+
+  <div class="text-right">
+    <button class="btn btn-warning" style="margin-right: 5px;" (click)="clearForm()">Clear</button>
+    <button type="submit" class="btn btn-primary">{{courseService.buttonName}}</button>
   </div>
 </form>

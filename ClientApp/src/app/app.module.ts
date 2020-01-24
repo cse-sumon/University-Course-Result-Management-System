@@ -28,6 +28,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AddCourseComponent } from './components/course/add-course/add-course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AddCourseComponent } from './components/course/add-course/add-course.co
     DashboardComponent,
     ForbiddenComponent,
     CourseComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

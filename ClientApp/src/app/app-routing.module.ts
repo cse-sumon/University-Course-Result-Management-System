@@ -8,6 +8,7 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { UserComponent } from './components/user/user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CourseComponent } from './components/course/course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -15,19 +16,22 @@ const routes: Routes = [
     path: 'user', component: UserComponent,
     children:[
       {path:'login', component:LoginComponent},
-      { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard]},
+      { path: 'registration', component: RegistrationComponent},
     ]
   },
   {
-    path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard],
+    path: 'dashboard', component: DashboardComponent,
     children:[
       {path:'',component:HomeComponent},
       {path:'course', component:CourseComponent},
 
     ]
   },
- 
+
+  // ,canActivate: [AuthGuard]
+  {path:'**',component:PageNotFoundComponent},
   {path:'forbidden',component:ForbiddenComponent},
+ 
   
 ];
 
