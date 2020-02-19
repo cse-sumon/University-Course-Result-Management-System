@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CourseService } from 'src/app/shared/course.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SemesterService } from 'src/app/shared/semester.service';
+import { DepartmentService } from 'src/app/shared/department.service';
+import { Course } from 'src/app/models/course.model';
+import { ToastrService } from 'ngx-toastr';
+import { Semester } from 'src/app/models/semester.model';
+import { Department } from 'src/app/models/department.model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-course',
@@ -9,53 +16,120 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddCourseComponent implements OnInit {
 
-  constructor(private courseService: CourseService, private fb:FormBuilder) { }
+  semesterList: Semester[];
+  departmentList: Department[];
 
-  courseForm =this.fb.group({
-    id: [null],
-    code: ['', Validators.required, Validators.minLength(5)],
-    name: ['',Validators.required],
-    credit: ['',Validators.required],
-    description: [''],
-    departmentId: [null,Validators.required],
-    departmentName: [''],
-    semesterId: [null, Validators.required],
-    semesterName: [''],
-    createdAt:['']
-
-  });
-
-
+  constructor(private courseService: CourseService, private fb: FormBuilder,
+    private semesterService: SemesterService, private departmentService: DepartmentService,
+    private toastr: ToastrService,
+    public dialogRef: MatDialogRef<AddCourseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit() {
-    this.initializeCourseForm();
+    this.getSemester();
+    this.getDepartment();
+
   }
 
-  
-  initializeCourseForm() {
-    this.courseForm.setValue({
-      id: null,
-      code: null,
-      name: null,
-      credit: null,
-      description: '',
-      departmentId: null,
-      departmentName: null,
-      semesterId: null,
-      semesterName: null,
-      createdAt: ''
-    });
+  onNoClick(): void {
+    this.courseService.courseForm.reset();
+    this.courseService.initializeCourseForm();
+    this.dialogRef.close();
   }
 
 
-  clearForm(){
-    this.courseForm.reset();
-    this.initializeCourseForm();
+  clearForm() {
+    this.courseService.courseForm.reset();
+    this.courseService.initializeCourseForm();
   }
 
-  onSubmit(){
-    console.log(this.courseForm.value);
+  getSemester() {
+    this.semesterService.getAllSemesters().subscribe(
+      res => {
+        this.semesterList = <any>res;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+
+  getDepartment() {
+    this.departmentService.getAllDepartments().subscribe(
+      res => {
+        this.departmentList =<any> res;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  onSubmit(courseForm) {
+    if (this.courseService.courseForm.valid) {
+      let course = {
+        code: courseForm.get('code').value,
+        name: courseForm.get('name').value,
+        credit: courseForm.get('credit').value,
+        description: courseForm.get('description').value,
+        departmentId:Number( courseForm.get('departmentId').value),
+        semesterId: Number(courseForm.get('semesterId').value)
+      };
+      if (!this.courseService.courseForm.get('id').value) {
+        this.insertCourse(course);
+      }
+      else {
+       let id = courseForm.get('id').value;
+        let course = {
+          id : courseForm.get('id').value,
+          code: courseForm.get('code').value,
+          name: courseForm.get('name').value,
+          credit: courseForm.get('credit').value,
+          description: courseForm.get('description').value,
+          departmentId: courseForm.get('departmentId').value,
+          semesterId: courseForm.get('semesterId').value
+        };
+        this.updateCourse(id, course);
+      }
+      
+    }
+    else {
+      console.log("Please send valid data", this.courseService.courseForm.value);
+    }
+  }
+
+
+  insertCourse(course) {
+    return this.courseService.postCourse(course).subscribe(
+      res => {
+        this.toastr.success("Added Successfully!");
+        console.log("Added");
+        this.clearForm();
+        this.courseService.getAllCourses();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateCourse(id,course) {
+    return this.courseService.putCourse(id,course).subscribe(
+      res => {
+        this.toastr.info("Updated Successfully!");
+        console.log("Updated");
+        this.clearForm();
+        this.courseService.getAllCourses();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
 
 
 }
+
+
+

@@ -60,7 +60,7 @@ namespace WebApi
             services.AddScoped(typeof(IStudentResultRepository), typeof(StudentResultRepository));
 
             //Service
-            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddTransient<ISemesterService, SemesterService>();
             services.AddTransient<IDesignationService, DesignationService>();
             services.AddTransient<ICourseService, CourseService>();

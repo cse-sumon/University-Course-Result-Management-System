@@ -28,7 +28,7 @@ namespace OA.ViewModel
         [Column(TypeName = "decimal(2, 2)")]
         public decimal TotalCredit { get; set; }
 
-        [Required]
+       
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
 

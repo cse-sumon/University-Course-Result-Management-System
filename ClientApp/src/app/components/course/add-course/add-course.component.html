@@ -1,19 +1,49 @@
 <div class="row alert alert-dark">
-  <div class="col-sm-11">{{courseService.formTitle}}</div>
-  <div class="col-sm-1">
-    <mat-icon [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+  <div class="col-sm-9">{{courseService.formTitle}}</div>
+  <div class="col-sm-3">
+    <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon" (click)="onNoClick()">close
+    </mat-icon>
   </div>
 </div>
-<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="courseService.courseForm" (ngSubmit)="onSubmit(courseService.courseForm)">
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <input type="hidden" formControlName="id">
       <label for="code">Code</label>
       <input type="string" formControlName="code" class="form-control">
+      <div
+        *ngIf="courseService.courseForm.controls['code'].touched && !courseService.courseForm.controls['code'].valid">
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['code'].hasError('required') ">
+          Code is required
+        </span>
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['code'].hasError('minlength') ">
+          Minimum Length is 5
+        </span>
+      </div>
     </div>
+
     <div class="form-group col-md-6">
+      <label for="Credit">Credit</label>
+      <input type="number" formControlName="credit" class="form-control">
+      <div
+        *ngIf="courseService.courseForm.controls['credit'].touched && !courseService.courseForm.controls['credit'].valid">
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['credit'].hasError('required') ">
+          Credit is required
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
       <label for="name">Name</label>
-      <input type="name" formControlName="name" class="form-control">
+      <input type="name" formControlName="name" class="form-control" />
+      <div
+        *ngIf="courseService.courseForm.controls['name'].touched && !courseService.courseForm.controls['name'].valid">
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['name'].hasError('required') ">
+          Name is required
+        </span>
+      </div>
     </div>
   </div>
 
@@ -22,42 +52,45 @@
     <div class="form-group col-md-6">
       <label for="Department">Department</label>
       <select id="Department" class="form-control" formControlName="departmentId">
-        <option selected>Choose...</option>
-        <option>...</option>
+        <option [ngValue]="null" disabled>--Choose Department--</option>
+        <option *ngFor="let department of departmentList" value={{department.id}}>{{department.name}}</option>
       </select>
+      <div
+        *ngIf="courseService.courseForm.controls['departmentId'].touched && !courseService.courseForm.controls['departmentId'].valid">
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['departmentId'].hasError('required') ">
+          Department is required
+        </span>
+      </div>
     </div>
 
     <div class="form-group col-md-6">
       <label for="Semester">Semester</label>
       <select id="Semester" class="form-control" formControlName="semesterId">
-        <option selected>Choose...</option>
-        <option>...</option>
+        <option [ngValue]="null" disabled>--Choose Semester--</option>
+        <option *ngFor="let semester of semesterList" value={{semester.id}}>{{semester.name}}</option>
       </select>
+      <div
+        *ngIf="courseService.courseForm.controls['semesterId'].touched && !courseService.courseForm.controls['semesterId'].valid">
+        <span class="text-danger" *ngIf="courseService.courseForm.controls['semesterId'].hasError('required') ">
+          Semester is required
+        </span>
+      </div>
     </div>
   </div>
-  <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="Credit">Credit</label>
-        <input type="text" formCotrolName="Credit" class="form-control">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="CreatedAt">Created Date</label>
-        <input type="text" class="form-control" formControlName="createdAt">
-      </div>
 
-
-  </div>
   <div class="form-row">
     <div class="form-group col-md-12">
       <label for="Description">Description</label>
-      <textarea type="text" class="form-control" formControlName="description" ></textarea>
+      <textarea type="text" class="form-control" formControlName="description"></textarea>
     </div>
+
+  </div>
+
+  <div class="row float-right">
+    <button class="btn btn-warning" type="reset" style="margin-right: 5px;" (click)="clearForm()">Clear</button>
+    <button type="submit" class="btn btn-primary"
+      [disabled]='!courseService.courseForm.valid'>{{courseService.buttonName}}</button>
   </div>
 
 
-
-  <div class="text-right">
-    <button class="btn btn-warning" style="margin-right: 5px;" (click)="clearForm()">Clear</button>
-    <button type="submit" class="btn btn-primary">{{courseService.buttonName}}</button>
-  </div>
 </form>

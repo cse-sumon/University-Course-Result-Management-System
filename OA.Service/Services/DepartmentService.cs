@@ -56,7 +56,7 @@ namespace OA.Service.Services
 
         public void SoftDeleteDepartment(DepartmentViewModel model)
         {
-            _departmentRepository.Update(model);
+            _departmentRepository.SoftDelete(model);
         }
 
     }

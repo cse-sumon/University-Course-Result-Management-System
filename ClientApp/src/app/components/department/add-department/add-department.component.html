@@ -1,0 +1,32 @@
+<div class="row alert alert-dark">
+  <div class="col-sm-9">{{data.formTitle}}</div>
+  <div class="col-sm-3">
+    <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+      (click)="onNoClick()">close
+    </mat-icon>
+  </div>
+</div>
+
+<form [formGroup]="departmentServie.departmentForm" class="normal-form"
+  (submit)="onSubmit(departmentServie.departmentForm)">
+  <div style="margin:10px">
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <input formControlName="id" type="hidden">
+        <input formControlName="code" matInput placeholder="Code*">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <input formControlName="name" matInput placeholder="Name">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="button-row float-right">
+      <button mat-raised-button color="warn" (click)="onClear()" style="margin-right: 5px;">Clear</button>
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="departmentServie.departmentForm.invalid">Submit</button>
+    </div>
+  </div>
+</form>

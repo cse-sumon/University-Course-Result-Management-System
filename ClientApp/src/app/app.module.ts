@@ -29,6 +29,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AddCourseComponent } from './components/course/add-course/add-course.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SemesterService } from './shared/semester.service';
+import { DepartmentService } from './shared/department.service';
+import { DepartmentComponent } from './components/department/department.component';
+import { AddDepartmentComponent } from './components/department/add-department/add-department.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
+import { AddTeacherComponent } from './components/teacher/add-teacher/add-teacher.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,11 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ForbiddenComponent,
     CourseComponent,
     AddCourseComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DepartmentComponent,
+    AddDepartmentComponent,
+    TeacherComponent,
+    AddTeacherComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +62,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     BrowserAnimationsModule,
     ToastrModule.forRoot(
      {
+       timeOut:2500,
       progressBar: true
      }
     ),
@@ -67,12 +78,20 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatPaginatorModule,
     MatSortModule,
   ],
-  providers: [UserService,{
+  providers: [
+    UserService,
+    {
     provide:HTTP_INTERCEPTORS,
     useClass:AuthInterceptor,
     multi:true
-  }],
+  },
+  SemesterService,
+  DepartmentService,
+],
   bootstrap: [AppComponent],
-  entryComponents: [AddCourseComponent]
+  entryComponents: [
+    AddCourseComponent,
+    AddDepartmentComponent,
+  ]
 })
 export class AppModule { }

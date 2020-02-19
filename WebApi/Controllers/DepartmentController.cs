@@ -109,7 +109,7 @@ namespace WebApi.Controllers
                 _departmentService.SoftDeleteDepartment(departmentVM);
                 return NoContent();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

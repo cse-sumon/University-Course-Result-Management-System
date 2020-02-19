@@ -16,7 +16,7 @@ namespace OA.Repository.Repositories
         public DepartmentRepository(ApplicationContext context)
         {
             _context = context;
-            entities = _context.Set<Department>();
+            entities = context.Set<Department>();
         }
         public IEnumerable<DepartmentViewModel> GetAll()
         {
@@ -35,7 +35,7 @@ namespace OA.Repository.Repositories
 
         public DepartmentViewModel Get(int id)
         {
-            var department = entities.Where(e => e.Id == id && e.IsDeleted == false).SingleOrDefault();
+            var department = entities.AsNoTracking().Where(e => e.Id == id && e.IsDeleted == false).SingleOrDefault();
             if (department == null)
             {
                 return null;
@@ -97,16 +97,28 @@ namespace OA.Repository.Repositories
             {
                 throw new ArgumentNullException("department");
             }
-            Department department = new Department()
+            try
             {
-                Code = model.Code,
-                Name = model.Name,
-                CreatedAt = model.CreatedAt,
-                ModifiedAt = DateTime.Now,
-                IsDeleted = true
-            };
-            entities.Remove(department);
-            _context.SaveChanges();
+                Department department = new Department
+                {
+                    Id = model.Id,
+                    Code = model.Code,
+                    Name = model.Name,
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now,
+                    IsDeleted = true
+                };
+                entities.Update(department);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        
+           
         }
 
         public void Remove(DepartmentViewModel model)

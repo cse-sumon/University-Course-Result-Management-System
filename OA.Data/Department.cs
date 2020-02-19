@@ -7,7 +7,6 @@ namespace OA.DBModel
 {
     public class Department
     {
-      
         public int Id { get; set; }
         [Required]
         [MinLength(2)]

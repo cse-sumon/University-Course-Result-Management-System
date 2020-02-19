@@ -9,6 +9,8 @@ import { UserComponent } from './components/user/user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CourseComponent } from './components/course/course.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DepartmentComponent } from './components/department/department.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -24,6 +26,8 @@ const routes: Routes = [
     children:[
       {path:'',component:HomeComponent},
       {path:'course', component:CourseComponent},
+      {path:'department', component:DepartmentComponent},
+      {path:'teacher', component:TeacherComponent},
 
     ]
   },
