@@ -74,7 +74,7 @@ export class AddDepartmentComponent implements OnInit {
         this.toastr.info("Updated Successfully!");
         console.log("Updated");
         this.onClear();
-        this.departmentServie.getAllDepartments();
+        this.onNoClick();
       },
       error => {
         console.log(error);

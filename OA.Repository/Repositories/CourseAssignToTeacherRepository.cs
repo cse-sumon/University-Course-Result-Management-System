@@ -26,6 +26,7 @@ namespace OA.Repository.Repositories
                     join d in _context.Departments on ca.DepartmentId equals d.Id
                     join c in _context.Courses on ca.CourseId equals c.Id
                     join t in _context.Teachers on ca.TeacherId equals t.Id
+                    join s in _context.Semesters on c.SemesterId equals s.Id
                     select new CourseAssignToTeacherViewModel
                     {
                         Id = ca.Id,
@@ -36,7 +37,31 @@ namespace OA.Repository.Repositories
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
-                        CreatedAt = c.CreatedAt
+                        Semester = s.Name,
+                        CreatedAt = ca.CreatedAt
+                    }).AsEnumerable().ToList();
+        }
+
+        public IEnumerable<CourseAssignToTeacherViewModel> GetAllByDepartmentId(int id)
+        {
+            return (from ca in _context.CourseAssignToTeachers
+                    where ca.DepartmentId == id
+                    join d in _context.Departments on ca.DepartmentId equals d.Id
+                    join c in _context.Courses on ca.CourseId equals c.Id
+                    join t in _context.Teachers on ca.TeacherId equals t.Id
+                    join s in _context.Semesters on c.SemesterId equals s.Id
+                    select new CourseAssignToTeacherViewModel
+                    {
+                        Id = ca.Id,
+                        DepartmentId = d.Id,
+                        DepartmentName = d.Name,
+                        TeacherId = t.Id,
+                        TeacherName = t.Name,
+                        CourseId = c.Id,
+                        CourseCode = c.Code,
+                        CourseName = c.Name,
+                        Semester = s.Name,
+                        CreatedAt = ca.CreatedAt
                     }).AsEnumerable().ToList();
         }
 
@@ -48,6 +73,7 @@ namespace OA.Repository.Repositories
                     join d in _context.Departments on ca.DepartmentId equals d.Id
                     join c in _context.Courses on ca.CourseId equals c.Id
                     join t in _context.Teachers on ca.TeacherId equals t.Id
+                    join s in _context.Semesters on c.SemesterId equals s.Id
                     select new CourseAssignToTeacherViewModel
                     {
                         Id = ca.Id,
@@ -58,7 +84,8 @@ namespace OA.Repository.Repositories
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
-                        CreatedAt = c.CreatedAt
+                        Semester = s.Name,
+                        CreatedAt = ca.CreatedAt
                     }).SingleOrDefault();
         }
 
@@ -81,7 +108,7 @@ namespace OA.Repository.Repositories
             _context.SaveChanges();
         }
 
-     
+
 
 
         public void Update(CourseAssignToTeacherViewModel model)

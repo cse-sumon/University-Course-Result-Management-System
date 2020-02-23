@@ -5,9 +5,10 @@ export class Teacher {
     mobile:number;
     address:string;
     departmentId:number;
-    departmentName:string;
+    departmentCode:string;
     designationId:number;
     designationName:string;
+    totalCredit:number;
     createdAt:Date;
     modifiedAt:Date;
 }

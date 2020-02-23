@@ -26,6 +26,11 @@ namespace OA.Service.Services
             return _teacherRepository.Get(id);
         }
 
+         public IEnumerable<TeacherViewModel> GetTeacherByDepartmentId(int id)
+        {
+            return _teacherRepository.GetByDepartmentId(id);
+        }
+
 
         public void InsertTeacher(TeacherViewModel model)
         {

@@ -20,6 +20,7 @@ namespace OA.ViewModel
         public int CourseId { get; set; }
         public string CourseCode { get; set; }
         public string CourseName { get; set; }
+        public string Semester { get; set; }
         public DateTime CreatedAt { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedAt { get; set; }

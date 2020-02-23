@@ -48,9 +48,9 @@ export class DepartmentComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.departmentService.initializeDepartmentForm();
+    this.departmentService.departmentForm.reset();
     const dialogRef = this.dialog.open(AddDepartmentComponent, {
-      width: '30%',
+      width: '40%',
       data: {formTitle: "Add New Department", buttonName: "Submit"}
     });
 
@@ -64,7 +64,7 @@ export class DepartmentComponent implements OnInit {
       res => {
         this.departmentService.populateForm(res);
         const dialogRef = this.dialog.open(AddDepartmentComponent, {
-          width: '30%',
+          width: '40%',
           data: {formTitle: "Update Department", buttonName: "Update"}
         });
     
@@ -78,7 +78,6 @@ export class DepartmentComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    console.log(id);
     var result = confirm("Are you want to remove this?");
     if (result) {
       this.departmentService.deleteDepartment(id).subscribe(

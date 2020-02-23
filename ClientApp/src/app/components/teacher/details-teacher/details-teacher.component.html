@@ -1,0 +1,47 @@
+<div >
+    <h3 class="text-center text-danger">{{data.title}}
+        <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+    (click)="onNoClick()">close
+    </mat-icon>
+    </h3>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-sm-6 left">
+        <tr>
+            <th>Name</th>
+            <td>{{details.rowData.name}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{details.rowData.email}}</td>
+        </tr>
+        <tr>
+            <th>Mobile</th>
+            <td>{{details.rowData.mobile}}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{details.rowData.address}}</td>
+        </tr>
+    </div>
+    <div class="col-sm-6 right">
+        <tr>
+            <th>Department</th>
+            <td>{{details.rowData.departmentCode}}</td>
+        </tr>
+        <tr>
+            <th>Designation</th>
+            <td>{{details.rowData.designationName}}</td>
+        </tr>
+        <tr>
+            <th>Total Credit</th>
+            <td>{{details.rowData.totalCredit}}</td>
+        </tr>
+        <tr>
+            <th>DateTime</th>
+            <td>{{details.rowData.createdAt | date:'medium'}}</td>
+        </tr>
+    </div>
+</div>

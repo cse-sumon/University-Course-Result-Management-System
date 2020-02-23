@@ -8,6 +8,7 @@ namespace OA.Service.Interfaces
     public interface ICourseService
     {
         IEnumerable<CourseViewModel> GetAllCourses();
+        IEnumerable<CourseViewModel> GetCourseByDepartmentId(int id);
         CourseViewModel GetCourse(int id);
         void InsertCourse(CourseViewModel model);
         void UpdateCourse(CourseViewModel model);

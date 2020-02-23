@@ -33,20 +33,21 @@ namespace OA.Repository.Repositories
                         Email = t.Email,
                         Mobile = t.Mobile,
                         Address = t.Address,
-                        DepartmentId = dg.Id,
-                        DepartmentName = dg.Name,
-                        DesignationId = dp.Id,
-                        DesignationName = dp.Name,
+                        DepartmentId = dp.Id,
+                        DepartmentCode = dp.Code,
+                        DesignationId = dg.Id,
+                        DesignationName = dg.Name,
+                        TotalCredit = t.TotalCredit,
                         CreatedAt = t.CreatedAt
                     }).AsEnumerable().ToList();
         }
 
         public TeacherViewModel Get(int id)
         {
-            return (from t in _context.Teachers
+            return (from t in _context.Teachers.AsNoTracking()
                     where t.Id == id && t.IsDeleted == false
-                    join dg in _context.Departments on t.DepartmentId equals dg.Id
-                    join dp in _context.Designations on t.DepartmentId equals dp.Id
+                    join dp in _context.Departments on t.DepartmentId equals dp.Id
+                    join dg in _context.Designations on t.DepartmentId equals dg.Id
                     select new TeacherViewModel
                     {
                         Id = t.Id,
@@ -54,12 +55,25 @@ namespace OA.Repository.Repositories
                         Email = t.Email,
                         Mobile = t.Mobile,
                         Address = t.Address,
-                        DepartmentId = dg.Id,
-                        DepartmentName = dg.Name,
-                        DesignationId = dp.Id,
-                        DesignationName = dp.Name,
+                        DepartmentId = dp.Id,
+                        DepartmentCode = dp.Code,
+                        DesignationId = dg.Id,
+                        DesignationName = dg.Name,
+                        TotalCredit = t.TotalCredit,
                         CreatedAt = t.CreatedAt
                     }).SingleOrDefault();
+        }   
+        
+        
+        public IEnumerable<TeacherViewModel> GetByDepartmentId(int id)
+        {
+            return (from t in _context.Teachers.AsNoTracking()
+                    where t.DepartmentId == id && t.IsDeleted == false
+                    select new TeacherViewModel
+                    {
+                        Id = t.Id,
+                        Name = t.Name,
+                    }).AsEnumerable().ToList();
         }
 
 
@@ -73,11 +87,12 @@ namespace OA.Repository.Repositories
             Teacher teacher = new Teacher
             {
                 Name = model.Name,
-                Email = model.Name,
+                Email = model.Email,
                 Mobile = model.Mobile,
                 Address = model.Address,
-                DepartmentId = model.DepartmentId,
                 DesignationId = model.DesignationId,
+                DepartmentId = model.DepartmentId,
+                TotalCredit = model.TotalCredit,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = null,
                 IsDeleted = false,
@@ -95,11 +110,12 @@ namespace OA.Repository.Repositories
             {
                 Id = model.Id,
                 Name = model.Name,
-                Email = model.Name,
+                Email = model.Email,
                 Mobile = model.Mobile,
                 Address = model.Address,
-                DepartmentId = model.DepartmentId,
                 DesignationId = model.DesignationId,
+                DepartmentId = model.DepartmentId,
+                TotalCredit = model.TotalCredit,
                 CreatedAt = model.CreatedAt,
                 ModifiedAt = DateTime.Now,
                 IsDeleted = false,
@@ -130,17 +146,18 @@ namespace OA.Repository.Repositories
             {
                 Id = model.Id,
                 Name = model.Name,
-                Email = model.Name,
+                Email = model.Email,
                 Mobile = model.Mobile,
                 Address = model.Address,
-                DepartmentId = model.DepartmentId,
                 DesignationId = model.DesignationId,
+                DepartmentId = model.DepartmentId,
+                TotalCredit = model.TotalCredit,
                 CreatedAt = model.CreatedAt,
                 ModifiedAt = DateTime.Now,
                 IsDeleted = true,
             };
 
-            entities.Remove(teacher);
+            entities.Update(teacher);
             _context.SaveChanges();
         }
 

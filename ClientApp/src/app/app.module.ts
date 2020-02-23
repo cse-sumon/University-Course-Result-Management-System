@@ -35,6 +35,9 @@ import { DepartmentComponent } from './components/department/department.componen
 import { AddDepartmentComponent } from './components/department/add-department/add-department.component';
 import { TeacherComponent } from './components/teacher/teacher.component';
 import { AddTeacherComponent } from './components/teacher/add-teacher/add-teacher.component';
+import { DetailsTeacherComponent } from './components/teacher/details-teacher/details-teacher.component';
+import { CourseAssignToTeacherComponent } from './components/course-assign-to-teacher/course-assign-to-teacher.component';
+import { AddCourseAssignToTeacherComponent } from './components/course-assign-to-teacher/add-course-assign-to-teacher/add-course-assign-to-teacher.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,10 @@ import { AddTeacherComponent } from './components/teacher/add-teacher/add-teache
     AddDepartmentComponent,
     TeacherComponent,
     AddTeacherComponent,
+    DetailsTeacherComponent,
+    CourseAssignToTeacherComponent,
+    AddCourseAssignToTeacherComponent
+
   ],
   imports: [
     BrowserModule,
@@ -92,6 +99,9 @@ import { AddTeacherComponent } from './components/teacher/add-teacher/add-teache
   entryComponents: [
     AddCourseComponent,
     AddDepartmentComponent,
+    DetailsTeacherComponent,
+    AddTeacherComponent,
+    AddCourseAssignToTeacherComponent,
   ]
 })
 export class AppModule { }

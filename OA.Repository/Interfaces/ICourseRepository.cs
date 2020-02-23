@@ -9,6 +9,7 @@ namespace OA.Repository.Interfaces
     public interface ICourseRepository
     {
         IEnumerable<CourseViewModel> GetAll();
+        IEnumerable<CourseViewModel> GetAllByDepartmentId(int id);
         CourseViewModel Get(int id);
         void Insert(CourseViewModel model);
         void Update(CourseViewModel model);

@@ -21,6 +21,11 @@ namespace OA.Service.Services
         public IEnumerable<CourseViewModel> GetAllCourses()
         {
             return _courseRepository.GetAll();
+        } 
+        
+        public IEnumerable<CourseViewModel> GetCourseByDepartmentId(int id)
+        {
+            return _courseRepository.GetAllByDepartmentId(id);
         }
 
         public CourseViewModel GetCourse(int id)

@@ -4,6 +4,8 @@ import { DepartmentService } from 'src/app/shared/department.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Teacher } from 'src/app/models/Teacher.model';
+import { DetailsTeacherComponent } from './details-teacher/details-teacher.component';
+import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 
 @Component({
   selector: 'app-teacher',
@@ -12,7 +14,7 @@ import { Teacher } from 'src/app/models/Teacher.model';
 })
 export class TeacherComponent implements OnInit {
   ELEMENT_DATA: Teacher[];
-  displayedColumns: string[] = ['id', 'code', 'name', 'createdAt', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'mobile', 'designationName', 'departmentCode', 'totalCredit', 'action'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -20,9 +22,9 @@ export class TeacherComponent implements OnInit {
   constructor(
     private teacherService: TeacherService,
     private departmentServie: DepartmentService,
-    private toastr : ToastrService,
-    private dialog : MatDialog
-    ) { }
+    private toastr: ToastrService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.getTeachers();
@@ -35,7 +37,6 @@ export class TeacherComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(res);
       }
     )
   }
@@ -48,4 +49,60 @@ export class TeacherComponent implements OnInit {
     }
   }
 
+  onViewDetails(row:any) {
+     this.teacherService.populateForm(row);
+    const dialogRef = this.dialog.open(DetailsTeacherComponent, {
+      width: '50%',
+      data: { title: "Teacher Details", rowData:row}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+
+  onCreate(): void {
+    this.teacherService.teacherForm.reset();
+    const dialogRef = this.dialog.open(AddTeacherComponent, {
+      width: '50%',
+      data: {formTitle: "Add New Teacher", buttonName: "Submit"}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+  onEdit(row:Teacher){
+    this.teacherService.populateForm(row);
+    const dialogRef = this.dialog.open(AddTeacherComponent, {
+      width: '50%',
+      data: {formTitle: "Update Teacher", buttonName: "Update"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+  onDelete(id:number){
+    var result = confirm('Are you want to remove this ?')
+    if (result) {
+      this.teacherService.deleteTeacher(id).subscribe(
+        res => {
+          this.toastr.warning("Deleted Successfully");
+          this.ngOnInit();
+        },
+        error => {
+          console.log(error);
+        });
+    }
+  }
+
+
+
+
+
 }
+
+

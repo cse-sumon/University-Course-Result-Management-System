@@ -29,6 +29,13 @@ namespace WebApi.Controllers
         }
 
 
+        // GET: api/CourseAssignToTeacher/GetAllCourseAssignByDepartmentId/1
+        [HttpGet("GetAllCourseAssignByDepartmentId/{id}")]
+        public IActionResult GetAllCourseAssignByDepartmentId(int id)
+        {
+            return Ok(_courseAssignToTeacherService.GetAllCourseAssignByDepartmentId(id));
+        }
+
         // GET: api/CourseAssignToTeacher/1
         [HttpGet("{id}")]
         public IActionResult GetCourseAssign(int id)

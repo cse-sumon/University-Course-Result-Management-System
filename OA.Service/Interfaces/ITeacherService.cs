@@ -9,6 +9,7 @@ namespace OA.Service.Interfaces
     {
         IEnumerable<TeacherViewModel> GetAllTeachers();
         TeacherViewModel GetTeacher(int id);
+        IEnumerable<TeacherViewModel> GetTeacherByDepartmentId(int id);
         void InsertTeacher(TeacherViewModel model);
         void UpdateTeacher(TeacherViewModel model);
         void DeleteTeacher(int id);

@@ -38,6 +38,19 @@ namespace OA.Repository.Repositories
                          SemesterName= s.Name,
                          CreatedAt = c.CreatedAt
                      }).AsEnumerable().ToList();
+        }  
+        
+        public IEnumerable<CourseViewModel> GetAllByDepartmentId(int id)
+        {
+              return (from c in _context.Courses
+                      where c.DepartmentId==id && c.IsDeleted == false
+                     select new CourseViewModel
+                     {
+                         Id = c.Id,
+                         Code = c.Code,
+                         Name = c.Name,
+                         Credit = c.Credit,
+                     }).AsEnumerable().ToList();
         }
 
         public CourseViewModel Get(int id)

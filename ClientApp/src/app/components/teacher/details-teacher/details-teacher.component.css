@@ -1,0 +1,13 @@
+.left th{
+    min-width: 70px;
+}
+.left td{
+    color: rgb(35, 54, 223);
+}
+
+.right th{
+    min-width: 100px;
+}
+.right td{
+    color: rgb(35, 54, 223);
+}

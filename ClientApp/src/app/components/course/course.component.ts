@@ -49,7 +49,7 @@ export class CourseComponent {
   }
 
   onCreate(): void {
-    this.courseService.initializeCourseForm();
+    this.courseService.courseForm.reset();
     this.courseService.formTitle = "Add New Course"
     this.courseService.buttonName = "Save"
     const dialogConfig = new MatDialogConfig();

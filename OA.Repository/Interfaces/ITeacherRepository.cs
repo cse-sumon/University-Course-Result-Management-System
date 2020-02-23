@@ -10,6 +10,7 @@ namespace OA.Repository.Interfaces
     {
         IEnumerable<TeacherViewModel> GetAll();
         TeacherViewModel Get(int id);
+        IEnumerable<TeacherViewModel> GetByDepartmentId(int id);
         void Insert(TeacherViewModel model);
         void Update(TeacherViewModel model);
         void Delete(TeacherViewModel model);

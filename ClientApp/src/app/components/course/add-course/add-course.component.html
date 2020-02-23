@@ -10,7 +10,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <input type="hidden" formControlName="id">
-      <label for="code">Code</label>
+      <label for="code">Code*</label>
       <input type="string" formControlName="code" class="form-control">
       <div
         *ngIf="courseService.courseForm.controls['code'].touched && !courseService.courseForm.controls['code'].valid">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label for="Credit">Credit</label>
+      <label for="Credit">Credit*</label>
       <input type="number" formControlName="credit" class="form-control">
       <div
         *ngIf="courseService.courseForm.controls['credit'].touched && !courseService.courseForm.controls['credit'].valid">
@@ -36,7 +36,7 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-12">
-      <label for="name">Name</label>
+      <label for="name">Name*</label>
       <input type="name" formControlName="name" class="form-control" />
       <div
         *ngIf="courseService.courseForm.controls['name'].touched && !courseService.courseForm.controls['name'].valid">
@@ -50,7 +50,7 @@
   <div class="form-row">
 
     <div class="form-group col-md-6">
-      <label for="Department">Department</label>
+      <label for="Department">Department*</label>
       <select id="Department" class="form-control" formControlName="departmentId">
         <option [ngValue]="null" disabled>--Choose Department--</option>
         <option *ngFor="let department of departmentList" value={{department.id}}>{{department.name}}</option>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label for="Semester">Semester</label>
+      <label for="Semester">Semester*</label>
       <select id="Semester" class="form-control" formControlName="semesterId">
         <option [ngValue]="null" disabled>--Choose Semester--</option>
         <option *ngFor="let semester of semesterList" value={{semester.id}}>{{semester.name}}</option>
@@ -87,7 +87,7 @@
   </div>
 
   <div class="row float-right">
-    <button class="btn btn-warning" type="reset" style="margin-right: 5px;" (click)="clearForm()">Clear</button>
+    <button class="btn btn-danger" type="reset" style="margin-right: 5px;" (click)="clearForm()">Clear</button>
     <button type="submit" class="btn btn-primary"
       [disabled]='!courseService.courseForm.valid'>{{courseService.buttonName}}</button>
   </div>

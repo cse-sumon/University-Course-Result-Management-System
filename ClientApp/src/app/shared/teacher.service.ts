@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Teacher } from '../models/Teacher.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +21,20 @@ export class TeacherService {
 
   teacherForm = this.fb.group({
     id: [''],
-    name: [''],
-    email: [''],
-    mobile: [''],
-    address: [''],
-    TeacherId: [''],
-    TeacherName: [''],
-    designationId: [''],
+    name: ['',Validators.required],
+    email: ['',[Validators.required,Validators.email]],
+    mobile: ['',Validators.required],
+    address: ['',[Validators.required]],
+    departmentId: ['',Validators.required],
+    departmentCode: [''],
+    designationId: ['',Validators.required],
     designationName: [''],
-    createdAt: [''],
-    modifiedAt: ['']
+    totalCredit: ['',Validators.required],
+    createdAt: [null],
+    modifiedAt: [null]
   });
+
+
 
   initializeTeacherForm() {
     this.teacherForm.setValue({
@@ -39,21 +43,22 @@ export class TeacherService {
       email: [''],
       mobile: [''],
       address: [''],
-      TeacherId: [''],
-      TeacherName: [''],
+      departmentId: [''],
+      departmentCode: [''],
       designationId: [''],
       designationName: [''],
-      createdAt: [''],
-      modifiedAt: ['']
+      totalCredit: [''],
+      createdAt: [null],
+      modifiedAt: [null]
     })
   }
 
-  getDesignation() {
+  getAllDesignations() {
     return this.http.get(this.baseUrl + '/designation');
   }
 
-  getAllTeachers(){
-    return this.http.get<Teacher>(this.baseUrl+'/teacher');
+  getAllTeachers() {
+    return this.http.get<Teacher>(this.baseUrl + '/teacher');
   }
 
   getTeacher(id: number) {
@@ -65,7 +70,7 @@ export class TeacherService {
   }
 
   putTeacher(id, teacher) {
-    return this.http.put(this.baseUrl + '/teacher/' +id, teacher);
+    return this.http.put(this.baseUrl + '/teacher/' + id, teacher);
   }
 
   deleteTeacher(id) {

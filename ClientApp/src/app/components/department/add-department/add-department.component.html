@@ -19,14 +19,14 @@
     </div>
     <div class="row">
       <mat-form-field class="example-full-width">
-        <input formControlName="name" matInput placeholder="Name">
+        <input formControlName="name" matInput placeholder="Name*">
         <mat-error>This field is mandatory.</mat-error>
       </mat-form-field>
     </div>
     <div class="button-row float-right">
-      <button mat-raised-button color="warn" (click)="onClear()" style="margin-right: 5px;">Clear</button>
+      <button mat-raised-button color="warn" type="reset" (click)="onClear()" style="margin-right: 5px;">Clear</button>
       <button mat-raised-button color="primary" type="submit"
-        [disabled]="departmentServie.departmentForm.invalid">Submit</button>
+        [disabled]="departmentServie.departmentForm.invalid">{{data.buttonName}}</button>
     </div>
   </div>
 </form>

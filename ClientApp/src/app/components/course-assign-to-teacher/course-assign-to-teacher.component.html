@@ -1,0 +1,12 @@
+<h4 class="text-center text-primary">Course Assign To Teacher List</h4>
+<div class="row">
+  <div class="col-sm-10">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Teacher"/>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-2">
+    <button mat-raised-button color="primary"><i class="fas fa-plus" (click)="onCreate()"> <span
+          style="margin-left: 8px; font-size: 18px;">Create</span></i></button>
+  </div>
+</div>

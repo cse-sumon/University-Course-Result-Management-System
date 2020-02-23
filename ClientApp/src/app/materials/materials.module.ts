@@ -34,6 +34,8 @@ import {
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
+  MatNativeDateModule,
+  
 
 } from '@angular/material';
 
@@ -76,6 +78,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatFormFieldModule,
   MatGridListModule,
+  MatNativeDateModule
 
 ]
 

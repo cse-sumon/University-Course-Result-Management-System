@@ -23,9 +23,9 @@ namespace OA.ViewModel
         public string DesignationName { get; set; }
         [Required]
         public int DepartmentId { get; set; }
-        public string DepartmentName { get; set; }
+        public string DepartmentCode { get; set; }
         [Required]
-        [Column(TypeName = "decimal(2, 2)")]
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalCredit { get; set; }
 
        

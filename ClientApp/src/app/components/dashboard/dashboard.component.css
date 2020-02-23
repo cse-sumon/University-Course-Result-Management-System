@@ -31,3 +31,6 @@
   flex: 1 1 auto;
 }
 
+.mat-list-item{
+  border-bottom: 1px solid silver;
+}

@@ -42,6 +42,18 @@ namespace WebApi.Controllers
         }
 
 
+        // GET: api/teacher/getTeacherByDepartmentId/1
+        [HttpGet("getTeacherByDepartmentId/{id}")]
+        public IActionResult GetTeacherByDepartmentId(int id)
+        {
+            var teacher = _teacherService.GetTeacherByDepartmentId(id);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return Ok(teacher);
+        }
+
 
         // Post: api/Teacher
         [HttpPost]
@@ -79,7 +91,7 @@ namespace WebApi.Controllers
                 _teacherService.UpdateTeacher(model);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

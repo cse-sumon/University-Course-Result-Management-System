@@ -41,6 +41,17 @@ namespace WebApi.Controllers
             return Ok(course);
         }
 
+        // GET: api/Course/getCourseByDepartmentId/1
+        [HttpGet("getCourseByDepartmentId/{id}")]
+        public IActionResult GetCourseByDepartmentId(int id)
+        {
+            var course = _courseService.GetCourseByDepartmentId(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return Ok(course);
+        }
 
 
         // Post: api/Course

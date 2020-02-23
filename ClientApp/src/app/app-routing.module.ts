@@ -11,6 +11,7 @@ import { CourseComponent } from './components/course/course.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { TeacherComponent } from './components/teacher/teacher.component';
+import { CourseAssignToTeacherComponent } from './components/course-assign-to-teacher/course-assign-to-teacher.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -28,6 +29,7 @@ const routes: Routes = [
       {path:'course', component:CourseComponent},
       {path:'department', component:DepartmentComponent},
       {path:'teacher', component:TeacherComponent},
+      {path:'courseAssign', component:CourseAssignToTeacherComponent},
 
     ]
   },

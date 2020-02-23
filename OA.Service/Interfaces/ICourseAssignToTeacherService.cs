@@ -8,6 +8,7 @@ namespace OA.Service.Interfaces
     public interface ICourseAssignToTeacherService
     {
         IEnumerable<CourseAssignToTeacherViewModel> GetAllCourseAssign();
+        IEnumerable<CourseAssignToTeacherViewModel> GetAllCourseAssignByDepartmentId(int id);
         CourseAssignToTeacherViewModel GetCourseAssign(int id);
         void InsertCourseAssign(CourseAssignToTeacherViewModel model);
         void UpdateCourseAssign(CourseAssignToTeacherViewModel model);

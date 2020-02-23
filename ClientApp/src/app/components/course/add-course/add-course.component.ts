@@ -119,7 +119,7 @@ export class AddCourseComponent implements OnInit {
         this.toastr.info("Updated Successfully!");
         console.log("Updated");
         this.clearForm();
-        this.courseService.getAllCourses();
+        this.onNoClick();
       },
       error => {
         console.log(error);
