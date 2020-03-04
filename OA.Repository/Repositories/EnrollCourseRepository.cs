@@ -47,6 +47,7 @@ namespace OA.Repository.Repositories
                     where ec.Id == id
                     join c in _context.Courses on ec.CourseId equals c.Id
                     join r in _context.StudentRegisters on ec.StudentRegId equals r.Id
+                    join d in _context.Departments on r.DepartmentId equals d.Id
                     select new EnrollCourseViewModel
                     {
                         Id = ec.Id,
@@ -54,6 +55,7 @@ namespace OA.Repository.Repositories
                         StudentRegNo = r.RegNo,
                         StudentName = r.Name,
                         StudentEmail = r.Email,
+                        DepartmentCode = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,

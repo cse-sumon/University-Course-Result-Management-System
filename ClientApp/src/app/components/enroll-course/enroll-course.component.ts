@@ -77,31 +77,31 @@ export class EnrollCourseComponent implements OnInit {
     });
   }
 
-  // onEdit(row) {
-  //   this.studentRegisterService.populateForm(row);
-  //   const dialogRef = this.dialog.open(AddStudentRegisterComponent, {
-  //     width: '50%',
-  //     data: { formTitle: "Update Student Register", buttonName: "Update" }
-  //   });
+  onEdit(row) {
+    this.enrollCourseService.populateForm(row);
+    const dialogRef = this.dialog.open(AddEnrollCourseComponent, {
+      width: '50%',
+      data: { formTitle: "Update Enroll Course", buttonName: "Update" }
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.ngOnInit();
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
 
-  // onDelete(id: number) {
-  //   var result = confirm('Are you want to remove this ?')
-  //   if (result) {
-  //     this.studentRegisterService.deleteStudentRegister(id).subscribe(
-  //       res => {
-  //         this.toastr.warning("Deleted Successfully");
-  //         this.ngOnInit();
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }
+  onDelete(id: number) {
+    var result = confirm('Are you want to remove this ?')
+    if (result) {
+      this.enrollCourseService.deleteEnrollCourse(id).subscribe(
+        res => {
+          this.toastr.warning("Deleted Successfully");
+          this.ngOnInit();
+        },
+        error => {
+          console.log(error);
+        });
+    }
+  }
 
 
 

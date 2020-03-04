@@ -15,9 +15,9 @@ export class AddEnrollCourseComponent implements OnInit {
   studentRegNoList;
   courseList;
   constructor(
-    private enrollCourseService : EnrollCourseService,
-    private studentRegisterService : StudentRegisterService,
-    private courseAssignService : CourseAssignToTeacherService,
+    private enrollCourseService: EnrollCourseService,
+    private studentRegisterService: StudentRegisterService,
+    private courseAssignService: CourseAssignToTeacherService,
     private dialogRef: MatDialogRef<AddEnrollCourseComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private toastr: ToastrService
@@ -25,6 +25,12 @@ export class AddEnrollCourseComponent implements OnInit {
 
   ngOnInit() {
     this.getAllRegisterStudent();
+
+     //show course list & selected course with updated form
+     var id = this.enrollCourseService.enrollCourseForm.get('studentRegId').value;
+     if (id > 0) {
+      this.onChangeStudentRegNo(id)
+     }
   }
 
   onNoClick(): void {
@@ -37,46 +43,99 @@ export class AddEnrollCourseComponent implements OnInit {
     this.enrollCourseService.initializeEnrollCourseForm();
   }
 
-getAllRegisterStudent(){
-  this.studentRegisterService.getAllStudentRegister().subscribe(
-    res =>{
-      this.studentRegNoList = res;
-    },
-    error=>{
-      console.log(error);
+  getAllRegisterStudent() {
+    this.studentRegisterService.getAllStudentRegister().subscribe(
+      res => {
+        this.studentRegNoList = res;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  onChangeStudentRegNo(id) {
+    this.studentRegisterService.getStudentRegister(id).subscribe(
+      res => {
+        this.enrollCourseService.enrollCourseForm.patchValue({
+          name: res["name"],
+          email: res["email"],
+          departmentCode: res["departmentName"]
+        });
+        var departmentId = res["departmentId"];
+        this.getCourseByDepartmentId(departmentId);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getCourseByDepartmentId(id) {
+    this.courseAssignService.getCourseByDepartmentId(id).subscribe(
+      res => {
+        this.courseList = res;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  onSubmit(enrollCourseForm) {
+    if (this.enrollCourseService.enrollCourseForm.valid) {
+      let enrollCourse = {
+        studentRegId: enrollCourseForm.get('studentRegId').value,
+        courseId: enrollCourseForm.get('courseId').value,
+        createdAt: enrollCourseForm.get('createdAt').value,
+      };
+      if (enrollCourseForm.get('id').value == null) {
+        this.insertEnrollCourse(enrollCourse);
+      }
+      else {
+        let id = enrollCourseForm.get('id').value;
+        let enrollCourse = {
+          id: enrollCourseForm.get('id').value,
+          studentRegId: enrollCourseForm.get('studentRegId').value,
+          courseId: enrollCourseForm.get('courseId').value,
+          createdAt: enrollCourseForm.get('createdAt').value,
+        };
+        this.updateEnrollCourse(id, enrollCourse);
+      }
     }
-  )
-}
-
-onChangeStudentRegNo(id){
-  this.studentRegisterService.getStudentRegister(id).subscribe(
-    res=>{
-      this.enrollCourseService.enrollCourseForm.patchValue({
-        name: res["name"],
-        email: res["email"],
-        departmentCode: res["departmentName"]
-      });
-      var departmentId = res["departmentId"];
-      this.getCourseByDepartmentId(departmentId);
-    },
-    error=>{
-      console.log(error);
+    else {
+      console.log("Please send valid data", this.enrollCourseService.enrollCourseForm.value);
     }
-  )
-}
-
-getCourseByDepartmentId(id){
-  this.courseAssignService.getCourseByDepartmentId(id).subscribe(
-    res =>{
-      this.courseList = res;
-    },
-    error=>{
-      console.log(error);
-    }
-  )
-}
+  }
 
 
+  insertEnrollCourse(enrollCourse) {
+    return this.enrollCourseService.postAllEnrollCourses(enrollCourse).subscribe(
+      res => {
+        this.toastr.success("Added Successfully!");
+        console.log("Added");
+        this.onClear();
+        this.ngOnInit();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateEnrollCourse(id, enrollCourse) {
+    return this.enrollCourseService.putAllEnrollCourses(id, enrollCourse).subscribe(
+      res => {
+        this.toastr.info("Updated Successfully!");
+        console.log("Updated");
+        this.onClear();
+        this.onNoClick();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
 
 

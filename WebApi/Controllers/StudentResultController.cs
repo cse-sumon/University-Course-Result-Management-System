@@ -31,14 +31,14 @@ namespace WebApi.Controllers
 
         // GET: api/StudentResult/1
         [HttpGet("{id}")]
-        public IActionResult GetStudentResult(int id)
+        public IActionResult GetStudentResult(int studentRegId)
         {
-            var course = _studentResultService.GetStudentResult(id);
-            if (course == null)
+            var studentResults = _studentResultService.GetStudentResult(studentRegId);
+            if (studentResults == null)
             {
                 return NotFound();
             }
-            return Ok(course);
+            return Ok(studentResults);
         }
 
 
@@ -95,8 +95,8 @@ namespace WebApi.Controllers
             {
                 return BadRequest();
             }
-            var courseVM = _studentResultService.GetStudentResult(id);
-            if (courseVM == null)
+            var studentVM = _studentResultService.GetStudentResult(id);
+            if (studentVM == null)
             {
                 return NotFound();
             }

@@ -32,7 +32,7 @@ export class EnrollCourseService {
     this.enrollCourseForm.setValue({
       id: [null],
       studentRegId: [null],
-      StudentRegNo: [''],
+      studentRegNo: [''],
       name: [''],
       email: [''],
       departmentCode: [''],
@@ -64,8 +64,19 @@ export class EnrollCourseService {
     return this.http.delete(this.baseUrl + '/enrollCourse/' + id);
   }
 
-  populateForm(enrollCourse) {
-    this.enrollCourseForm.setValue(enrollCourse);
+  populateForm(row) {
+    this.enrollCourseForm.patchValue({
+      id:row['id'],
+      studentRegId:row['studentRegId'],
+      studentRegNo:row['studentRegNo'],
+      name:row['studentName'],
+      email:row['studentEmail'],
+      departmentId:row["departmentId"],
+      departmentCode:row["departmentCode"],
+      courseId:row["courseId"],
+      courseCode:row["courseCode"],
+      createdAt:row["createdAt"]
+    });
   }
 
 

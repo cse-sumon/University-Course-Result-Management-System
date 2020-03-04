@@ -32,7 +32,7 @@ namespace OA.Repository.Repositories
                         StudentRegNo = srg.RegNo,
                         Name = srg.Name,
                         Email = srg.Email,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
@@ -43,7 +43,7 @@ namespace OA.Repository.Repositories
         public StudentResultViewModel Get(int id)
         {
             return (from sr in _context.StudentResults
-                    where sr.Id == id
+                    where sr.StudentRegId==id
                     join c in _context.Courses on sr.CourseId equals c.Id
                     join srg in _context.StudentRegisters on sr.StudentRegId equals srg.Id
                     join d in _context.Departments on srg.DepartmentId equals d.Id
@@ -54,12 +54,12 @@ namespace OA.Repository.Repositories
                         StudentRegNo = srg.RegNo,
                         Name = srg.Name,
                         Email = srg.Email,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
                         Grade = sr.Grade,
-                    }).SingleOrDefault();
+                    }).AsNoTracking().SingleOrDefault();
         }
 
       
