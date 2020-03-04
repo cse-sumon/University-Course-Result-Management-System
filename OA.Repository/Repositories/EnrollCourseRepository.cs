@@ -24,11 +24,15 @@ namespace OA.Repository.Repositories
             return (from ec in _context.EnrollCourses
                     join c in _context.Courses on ec.CourseId equals c.Id
                     join r in _context.StudentRegisters on ec.StudentRegId equals r.Id
+                    join d in _context.Departments on r.DepartmentId equals d.Id
                     select new EnrollCourseViewModel
                     {
                         Id = ec.Id,
                         StudentRegId = r.Id,
                         StudentRegNo = r.RegNo,
+                        StudentName = r.Name,
+                        StudentEmail = r.Email,
+                        DepartmentCode = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
@@ -48,11 +52,13 @@ namespace OA.Repository.Repositories
                         Id = ec.Id,
                         StudentRegId = r.Id,
                         StudentRegNo = r.RegNo,
+                        StudentName = r.Name,
+                        StudentEmail = r.Email,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
                         CreatedAt = ec.CreatedAt
-                    }).SingleOrDefault();
+                    }).AsNoTracking().SingleOrDefault();
         }
 
 
@@ -96,7 +102,7 @@ namespace OA.Repository.Repositories
 
         public void Delete(int id)
         {
-            if (id! > 0)
+            if (id <= 0)
             {
                 throw new ArgumentNullException("EnrollCourse");
             }

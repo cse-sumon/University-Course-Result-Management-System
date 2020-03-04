@@ -1,12 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Dashboard</mat-toolbar>
+    <mat-toolbar><mat-icon>dashboard</mat-icon>Dashboard</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="course">Course</a>
-      <a mat-list-item routerLink="department">Department</a>
-      <a mat-list-item routerLink="teacher">Teacher</a>
-      <a mat-list-item routerLink="courseAssign">Course Assign</a>
+      <a mat-list-item routerLink="course"><mat-icon>library_books</mat-icon>Course</a>
+      <a mat-list-item routerLink="department"><mat-icon>location_city</mat-icon>Department</a>
+      <a mat-list-item routerLink="teacher"><mat-icon>people_alt</mat-icon>Teacher</a>
+      <a mat-list-item routerLink="courseAssign"><mat-icon>assignment</mat-icon>Course Assign</a>
+      <a mat-list-item routerLink="studentRegister"><mat-icon>group_add</mat-icon>Student Register</a>
+      <a mat-list-item routerLink="allocateClassRoom"><mat-icon>room</mat-icon>Allocate Room</a>
+      <a mat-list-item routerLink="viewClassSchedule"><mat-icon>remove_red_eye</mat-icon>Class Schedule</a>
+      <a mat-list-item routerLink="enrollCourse"><mat-icon>open_in_new</mat-icon>Enroll In Course</a>
       <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -17,12 +21,13 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <span>University Course & Result Management System</span> -->
-      <span>UCRMS</span>
+      <span><i class="fas fa-graduation-cap text-warning" style="margin-right: 5px;"></i>UCRMS</span>
       <span class="example-spacer"></span>
     
-       <mat-form-field style="width: 120px;">
-        <mat-label style=" color: white;"><i class="fas fa-user-tie" style="margin-right: 5px;"></i>
-          Logout</mat-label>
+       <mat-form-field style="width: 100px;">
+        
+        <mat-label style=" color: white; font-size: 16px;">
+          <i class="fas fa-user-circle" style="margin-right: 5px;"></i>Admin</mat-label>
         <mat-select>
           <mat-option>
           <button class="btn"> <i class="fas fa-id-card" style="margin-right: 6px;"></i> Profile</button><br>

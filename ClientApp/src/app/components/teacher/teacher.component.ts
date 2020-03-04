@@ -37,6 +37,9 @@ export class TeacherComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+      },
+      error=>{
+        console.log(error);
       }
     )
   }
@@ -53,6 +56,7 @@ export class TeacherComponent implements OnInit {
      this.teacherService.populateForm(row);
     const dialogRef = this.dialog.open(DetailsTeacherComponent, {
       width: '50%',
+      height: '300px',
       data: { title: "Teacher Details", rowData:row}
     });
     dialogRef.afterClosed().subscribe(result => {

@@ -12,6 +12,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DepartmentComponent } from './components/department/department.component';
 import { TeacherComponent } from './components/teacher/teacher.component';
 import { CourseAssignToTeacherComponent } from './components/course-assign-to-teacher/course-assign-to-teacher.component';
+import { StudentRegisterComponent } from './components/student-register/student-register.component';
+import { AllocateClassRoomComponent } from './components/allocate-class-room/allocate-class-room.component';
+import { ClassScheduleComponent } from './components/class-schedule/class-schedule.component';
+import { EnrollCourseComponent } from './components/enroll-course/enroll-course.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -30,6 +34,10 @@ const routes: Routes = [
       {path:'department', component:DepartmentComponent},
       {path:'teacher', component:TeacherComponent},
       {path:'courseAssign', component:CourseAssignToTeacherComponent},
+      {path:'studentRegister', component:StudentRegisterComponent},
+      {path:'allocateClassRoom', component:AllocateClassRoomComponent},
+      {path:'viewClassSchedule', component:ClassScheduleComponent},
+      {path:'enrollCourse', component:EnrollCourseComponent},
 
     ]
   },

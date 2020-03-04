@@ -1,0 +1,76 @@
+<div class="row alert alert-dark">
+    <div class="col-sm-9">{{data.formTitle}}</div>
+    <div class="col-sm-3">
+        <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+            (click)="onNoClick()">close
+        </mat-icon>
+    </div>
+</div>
+<form [formGroup]="studentRegisterService.studentRegisterForm" class="normal-form"
+    (submit)="onSubmit(studentRegisterService.studentRegisterForm)">
+    <div class="row main" style="margin:auto">
+        <div class="left" style="float: left; width:47%;margin-right: 6%;">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="id" type="hidden">
+                    <input formControlName="name" matInput placeholder="Name" required>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="email" matInput placeholder="Email" required>
+                    <mat-error *ngIf="studentRegisterService.studentRegisterForm.controls['email'].errors?.required">
+                        This field is mandatory.</mat-error>
+                    <mat-error *ngIf="studentRegisterService.studentRegisterForm.controls['email'].errors?.email">Please
+                        enter a valid email</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="mobile" matInput placeholder="Mobile" required>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="right" style="float: right; width: 47%;">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="address" matInput placeholder="Address" matInput required>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="departmentId" required>
+                        <mat-option *ngFor="let department of departmentList" [value]="department.id">
+                            {{department.code}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date</mat-label>
+                    <input matInput formControlName="createdAt" [matDatepicker]="dp3">
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="button-row float-right">
+        <button mat-raised-button color="warn" type="reset" (click)="onClear()"
+            style="margin-right: 5px;">Clear</button>
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="studentRegisterService.studentRegisterForm.invalid">{{data.buttonName}}</button>
+    </div>
+
+</form>

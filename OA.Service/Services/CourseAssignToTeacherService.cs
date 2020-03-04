@@ -25,6 +25,11 @@ namespace OA.Service.Services
         {
             return _courseAssignToTeacherRepository.GetAllByDepartmentId(id);
         }
+        
+        public double GetAssignCreditByTeacherId(int id)
+        {
+            return _courseAssignToTeacherRepository.GetAssignCreditByTeacherId(id);
+        }
 
         public CourseAssignToTeacherViewModel GetCourseAssign(int id)
         {

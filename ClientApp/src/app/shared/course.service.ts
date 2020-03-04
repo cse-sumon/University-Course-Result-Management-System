@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Course } from '../models/course.model';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { min } from 'rxjs/operators';
-import { getLocaleDateTimeFormat, DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'

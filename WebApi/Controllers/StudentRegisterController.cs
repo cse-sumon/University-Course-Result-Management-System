@@ -47,7 +47,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult PostStudentRegister(StudentRegisterViewModel model)
         {
-            if (!ModelState.IsValid)
+                if (!ModelState.IsValid)
             {
                 return BadRequest(model);
             }
@@ -95,8 +95,8 @@ namespace WebApi.Controllers
             {
                 return BadRequest();
             }
-            var courseVM = _studentRegisterService.GetStudentRegister(id);
-            if (courseVM == null)
+            var studentRegisterVM = _studentRegisterService.GetStudentRegister(id);
+            if (studentRegisterVM == null)
             {
                 return NotFound();
             }

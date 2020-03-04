@@ -1,0 +1,93 @@
+<div class="row alert alert-dark">
+    <div class="col-sm-9">{{data.formTitle}}</div>
+    <div class="col-sm-3">
+        <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+            (click)="onNoClick()">close
+        </mat-icon>
+    </div>
+</div>
+
+<form [formGroup]="allocateClassRoomService.allocateClassRoomForm" class="normal-form"
+    (submit)="onSubmit(allocateClassRoomService.allocateClassRoomForm)">
+    <div class="row main" style="margin:auto">
+        <div class="left" style="float: left; width:47%;margin-right: 6%;">
+            <input formControlName="id" type="hidden">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="departmentId" required
+                        (selectionChange)="onChangeDepartment($event.value)">
+                        <mat-option *ngFor="let department of departmentList" [value]="department.id">
+                            {{department.code}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Course</mat-label> 
+                    <mat-select formControlName="courseId" required>
+                        <mat-option *ngFor="let course of courseList" [value]="course.id">
+                            {{course.code}}
+                        </mat-option>
+                    </mat-select>
+                    
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Room</mat-label>
+                    <mat-select formControlName="roomId" required>
+                        <mat-option *ngFor="let room of roomList" [value]="room.id">
+                            {{room.roomNumber}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+
+        </div>
+
+
+        <div class="right" style="float: right; width: 47%;">
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Day</mat-label>
+                    <mat-select formControlName="day" required>
+                        <mat-option *ngFor="let day of dayList" [value]="day">
+                            {{day}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field>
+                    <input matInput type="time" class="bg-none" formControlName="from" placeholder="Time Form">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field>
+                    <input matInput type="time" class="bg-none" formControlName="to" placeholder="Time To">
+                </mat-form-field>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="button-row float-right">
+        <button mat-raised-button color="warn" type="reset" (click)="onClear()"
+            style="margin-right: 5px;">Clear</button>
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="allocateClassRoomService.allocateClassRoomForm.invalid">{{data.buttonName}}</button>
+    </div>
+
+</form>

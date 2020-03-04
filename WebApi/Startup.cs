@@ -58,6 +58,7 @@ namespace WebApi
             services.AddScoped(typeof(IAllocateClassRoomRepository), typeof(AllocateClassRoomRepository));
             services.AddScoped(typeof(IEnrollCourseRepository), typeof(EnrollCourseRepository));
             services.AddScoped(typeof(IStudentResultRepository), typeof(StudentResultRepository));
+            services.AddScoped(typeof(IRoomRepository), typeof(RoomRepository));
 
             //Service
             services.AddScoped<IDepartmentService, DepartmentService>();
@@ -70,6 +71,7 @@ namespace WebApi
             services.AddTransient<IAllocateClassRoomService, AllocateClassRoomService>();
             services.AddTransient<IEnrollCourseService, EnrollCourseService>();
             services.AddTransient<IStudentResultService, StudentResultService>();
+            services.AddTransient<IRoomService, RoomService>();
 
 
 

@@ -1,8 +1,97 @@
 <div class="row alert alert-dark">
     <div class="col-sm-9">{{data.formTitle}}</div>
     <div class="col-sm-3">
-      <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
-        (click)="onNoClick()">close
-      </mat-icon>
+        <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+            (click)="onNoClick()">close
+        </mat-icon>
     </div>
-  </div>
+</div>
+
+<form [formGroup]="courseAssignService.courseAssignForm" class="normal-form"
+    (submit)="onSubmit(courseAssignService.courseAssignForm)">
+    <div class="row main" style="margin:auto">
+        <div class="left" style="float: left; width:47%;margin-right: 6%;">
+            <input formControlName="id" type="hidden">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="departmentId" required
+                        (selectionChange)="onChangeDepartment($event.value)">
+                        <mat-option *ngFor="let department of departmentList" [value]="department.id">
+                            {{department.code}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Teacher</mat-label>
+                    <mat-select formControlName="teacherId" required (selectionChange)="onChangeTeacher($event.value)">
+                        <mat-option *ngFor="let teacher of teacherList" [value]="teacher.id">
+                            {{teacher.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <!-- <input formControlName="totalCredit" matInput placeholder="Credit to be Taken" > -->
+                    <input formControlName="totalCredit" matInput placeholder="Credit to be Taken">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="remainingCredit" matInput placeholder="Remaining Credit">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="right" style="float: right; width: 47%;">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Course Code</mat-label>
+                    <mat-select formControlName="courseId" required (selectionChange)="onChangeCourse($event.value)">
+                        <mat-option *ngFor="let course of courseList" [value]="course.id">
+                            {{course.code}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="courseName" matInput placeholder="Course Name" >
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input formControlName="credit" matInput placeholder="Credit" >
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date</mat-label>
+                    <input matInput formControlName="createdAt" [matDatepicker]="dp3">
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-row float-right">
+        <button mat-raised-button color="warn" type="reset" (click)="onClear()"
+            style="margin-right: 5px;">Clear</button>
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="courseAssignService.courseAssignForm.invalid">{{data.buttonName}}</button>
+    </div>
+
+</form>

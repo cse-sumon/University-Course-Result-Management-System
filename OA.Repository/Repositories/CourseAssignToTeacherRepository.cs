@@ -66,6 +66,19 @@ namespace OA.Repository.Repositories
         }
 
 
+        public double GetAssignCreditByTeacherId(int id)
+        {
+            
+            var result = (from ca in _context.CourseAssignToTeachers
+                         where ca.TeacherId == id
+                         join c in _context.Courses on ca.CourseId equals c.Id
+                         select c.Credit).Sum();
+
+            double credit = (double)result;
+            return credit;
+        }
+
+
         public CourseAssignToTeacherViewModel Get(int id)
         {
             return (from ca in _context.CourseAssignToTeachers
@@ -86,7 +99,7 @@ namespace OA.Repository.Repositories
                         CourseName = c.Name,
                         Semester = s.Name,
                         CreatedAt = ca.CreatedAt
-                    }).SingleOrDefault();
+                    }).AsNoTracking().SingleOrDefault();
         }
 
 

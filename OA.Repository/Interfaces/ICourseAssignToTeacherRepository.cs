@@ -9,6 +9,7 @@ namespace OA.Repository.Interfaces
     {
         IEnumerable<CourseAssignToTeacherViewModel> GetAll();
         IEnumerable<CourseAssignToTeacherViewModel> GetAllByDepartmentId(int id);
+        double GetAssignCreditByTeacherId(int id);
         CourseAssignToTeacherViewModel Get(int id);
         void Insert(CourseAssignToTeacherViewModel model);
         void Update(CourseAssignToTeacherViewModel model);

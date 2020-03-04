@@ -32,5 +32,11 @@
 }
 
 .mat-list-item{
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid skyblue;
 }
+
+.mat-icon{
+  color:rgb(124, 175, 241);
+  margin-right: 5px;
+}
+

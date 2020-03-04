@@ -35,6 +35,9 @@ export class DepartmentComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+      },
+      error=>{
+        console.log(error);
       }
     )
   }

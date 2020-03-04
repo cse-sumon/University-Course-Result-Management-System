@@ -1,0 +1,10 @@
+.left th{
+    width: 75px;
+}
+.right th{
+    min-width: 100px;
+}
+.right td ,.left td{
+    color:#007bff;
+    font-size: 16px;
+}

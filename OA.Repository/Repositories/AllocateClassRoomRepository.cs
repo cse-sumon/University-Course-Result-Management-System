@@ -31,7 +31,7 @@ namespace OA.Repository.Repositories
                         From = ac.From,
                         To = ac.To,
                         DepartmentId = d.Id,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         RoomId = r.Id,
                         RoomNumber = r.RoomNumner,
                         CourseId = c.Id,
@@ -54,13 +54,13 @@ namespace OA.Repository.Repositories
                         From = ac.From,
                         To = ac.To,
                         DepartmentId = d.Id,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         RoomId = r.Id,
                         RoomNumber = r.RoomNumner,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
-                    }).SingleOrDefault();
+                    }).AsNoTracking().SingleOrDefault();
         }
 
 
@@ -106,7 +106,7 @@ namespace OA.Repository.Repositories
 
         public void Delete(int id)
         {
-            if (id !> 0)
+            if (id <= 0)
             {
                 throw new ArgumentNullException("AllocateClassRoom");
             }

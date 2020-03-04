@@ -9,6 +9,7 @@ namespace OA.Service.Interfaces
     {
         IEnumerable<CourseAssignToTeacherViewModel> GetAllCourseAssign();
         IEnumerable<CourseAssignToTeacherViewModel> GetAllCourseAssignByDepartmentId(int id);
+        Double GetAssignCreditByTeacherId(int id);
         CourseAssignToTeacherViewModel GetCourseAssign(int id);
         void InsertCourseAssign(CourseAssignToTeacherViewModel model);
         void UpdateCourseAssign(CourseAssignToTeacherViewModel model);

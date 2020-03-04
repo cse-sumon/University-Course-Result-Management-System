@@ -48,6 +48,14 @@ namespace WebApi.Controllers
             return Ok(course);
         }
 
+        // GET: api/CourseAssignToTeacher/1
+        [HttpGet("GetAssignCreditByTeacherId/{id}")]
+        public IActionResult GetAssignCreditByTeacherId(int id)
+        {
+            return Ok(_courseAssignToTeacherService.GetAssignCreditByTeacherId(id));
+
+        }
+
 
 
         // Post: api/CourseAssignToTeacher
@@ -63,9 +71,12 @@ namespace WebApi.Controllers
                 _courseAssignToTeacherService.InsertCourseAssign(model);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                if (ex.InnerException.ToString().Contains("duplicate"))
+                {
+                    return BadRequest("Duplicate");
+                }
                 throw;
             }
         }
@@ -112,9 +123,9 @@ namespace WebApi.Controllers
                 _courseAssignToTeacherService.DeleteCourseAssign(id);
                 return NoContent();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

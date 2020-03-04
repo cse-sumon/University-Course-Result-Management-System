@@ -33,7 +33,7 @@ namespace OA.Repository.Repositories
                         Mobile = sr.Mobile,
                         Address = sr.Address,
                         DepartmentId = d.Id,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         CreatedAt = sr.CreatedAt
                     }).AsEnumerable().ToList();
         }
@@ -53,9 +53,9 @@ namespace OA.Repository.Repositories
                         Mobile = sr.Mobile,
                         Address = sr.Address,
                         DepartmentId = d.Id,
-                        DepartmentName = d.Name,
+                        DepartmentName = d.Code,
                         CreatedAt = sr.CreatedAt
-                    }).SingleOrDefault();
+                    }).AsNoTracking().SingleOrDefault();
         }
 
 
@@ -102,6 +102,7 @@ namespace OA.Repository.Repositories
             StudentRegister studentRegister = new StudentRegister
             {
                 Id = model.Id,
+                RegNo = model.RegNo,
                 Name = model.Name,
                 Email = model.Email,
                 Mobile = model.Mobile,
@@ -116,7 +117,7 @@ namespace OA.Repository.Repositories
 
         public void Delete(int id)
         {
-            if (id! > 0)
+            if (id <= 0)
             {
                 throw new ArgumentNullException("StudentRegister");
             }

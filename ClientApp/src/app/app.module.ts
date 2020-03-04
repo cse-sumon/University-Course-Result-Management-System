@@ -38,6 +38,14 @@ import { AddTeacherComponent } from './components/teacher/add-teacher/add-teache
 import { DetailsTeacherComponent } from './components/teacher/details-teacher/details-teacher.component';
 import { CourseAssignToTeacherComponent } from './components/course-assign-to-teacher/course-assign-to-teacher.component';
 import { AddCourseAssignToTeacherComponent } from './components/course-assign-to-teacher/add-course-assign-to-teacher/add-course-assign-to-teacher.component';
+import { StudentRegisterComponent } from './components/student-register/student-register.component';
+import { AddStudentRegisterComponent } from './components/student-register/add-student-register/add-student-register.component';
+import { DetailsStudentRegisterComponent } from './components/student-register/details-student-register/details-student-register.component';
+import { AllocateClassRoomComponent } from './components/allocate-class-room/allocate-class-room.component';
+import { AddAllocateClassRoomComponent } from './components/allocate-class-room/add-allocate-class-room/add-allocate-class-room.component';
+import { ClassScheduleComponent } from './components/class-schedule/class-schedule.component';
+import { EnrollCourseComponent } from './components/enroll-course/enroll-course.component';
+import { AddEnrollCourseComponent } from './components/enroll-course/add-enroll-course/add-enroll-course.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +66,15 @@ import { AddCourseAssignToTeacherComponent } from './components/course-assign-to
     AddTeacherComponent,
     DetailsTeacherComponent,
     CourseAssignToTeacherComponent,
-    AddCourseAssignToTeacherComponent
+    AddCourseAssignToTeacherComponent,
+    StudentRegisterComponent,
+    AddStudentRegisterComponent,
+    DetailsStudentRegisterComponent,
+    AllocateClassRoomComponent,
+    AddAllocateClassRoomComponent,
+    ClassScheduleComponent,
+    EnrollCourseComponent,
+    AddEnrollCourseComponent
 
   ],
   imports: [
@@ -102,6 +118,10 @@ import { AddCourseAssignToTeacherComponent } from './components/course-assign-to
     DetailsTeacherComponent,
     AddTeacherComponent,
     AddCourseAssignToTeacherComponent,
+    AddStudentRegisterComponent,
+    DetailsStudentRegisterComponent,
+    AddAllocateClassRoomComponent,
+    AddEnrollCourseComponent,
   ]
 })
 export class AppModule { }
