@@ -87,6 +87,10 @@ export class CourseAssignToTeacherService {
     return this.http.delete(this.baseUrl + '/CourseAssignToTeacher/' + id);
   }
 
+  unAssignAllCourses(){
+    return this.http.get(this.baseUrl+'/CourseAssignToTeacher/UnAssignAllCourse');
+  }
+
   populateForm(row) {
     this.courseAssignForm.patchValue({
       id:row['id'],

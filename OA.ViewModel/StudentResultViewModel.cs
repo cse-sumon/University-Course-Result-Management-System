@@ -11,9 +11,9 @@ namespace OA.ViewModel
         [Required]
         public int StudentRegId { get; set; }
         public string StudentRegNo { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string DepartmentName { get; set; }
+        public string StudentName { get; set; }
+        public string StudentEmail { get; set; }
+        public string DepartmentCode { get; set; }
         [Required]
         public int CourseId { get; set; }
         public string CourseCode { get; set; }

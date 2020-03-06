@@ -39,7 +39,21 @@ namespace OA.Repository.Repositories
                         CreatedAt = ec.CreatedAt
                     }).AsEnumerable().ToList();
         }
-
+        public IEnumerable<EnrollCourseViewModel> GetEnrollCourseByRegId(int id)
+        {
+            return (from ec in _context.EnrollCourses
+                    where ec.StudentRegId==id
+                    join c in _context.Courses on ec.CourseId equals c.Id
+                    join r in _context.StudentRegisters on ec.StudentRegId equals r.Id
+                    select new EnrollCourseViewModel
+                    {
+                        StudentRegId = r.Id,
+                        StudentRegNo = r.RegNo,
+                        CourseId = c.Id,
+                        CourseCode = c.Code,
+                        CourseName = c.Name,
+                    }).AsEnumerable().ToList();
+        }
 
         public EnrollCourseViewModel Get(int id)
         {
@@ -62,6 +76,8 @@ namespace OA.Repository.Repositories
                         CreatedAt = ec.CreatedAt
                     }).AsNoTracking().SingleOrDefault();
         }
+
+
 
 
         public void Insert(EnrollCourseViewModel model)

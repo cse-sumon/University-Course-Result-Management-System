@@ -30,17 +30,17 @@ namespace OA.Repository.Repositories
                         Id = sr.Id,
                         StudentRegId = sr.StudentRegId,
                         StudentRegNo = srg.RegNo,
-                        Name = srg.Name,
-                        Email = srg.Email,
-                        DepartmentName = d.Code,
+                        StudentName = srg.Name,
+                        StudentEmail = srg.Email,
+                        DepartmentCode = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
                         Grade = sr.Grade,
                     }).AsEnumerable().ToList();
-        }
-
-        public StudentResultViewModel Get(int id)
+        }   
+        
+        public IEnumerable<StudentResultViewModel> GetByRegId(int id)
         {
             return (from sr in _context.StudentResults
                     where sr.StudentRegId==id
@@ -52,9 +52,44 @@ namespace OA.Repository.Repositories
                         Id = sr.Id,
                         StudentRegId = sr.StudentRegId,
                         StudentRegNo = srg.RegNo,
-                        Name = srg.Name,
-                        Email = srg.Email,
-                        DepartmentName = d.Code,
+                        StudentName = srg.Name,
+                        StudentEmail = srg.Email,
+                        DepartmentCode = d.Code,
+                        CourseId = c.Id,
+                        CourseCode = c.Code,
+                        CourseName = c.Name,
+                        Grade = sr.Grade,
+                    }).AsEnumerable().ToList();
+        }
+
+
+        public IEnumerable<StudentResultViewModel> GetAllRegNo()
+        {
+            return (from sr in _context.StudentResults
+                    join srg in _context.StudentRegisters on sr.StudentRegId equals srg.Id
+                    select new StudentResultViewModel
+                    {
+                        StudentRegId = sr.StudentRegId,
+                        StudentRegNo = srg.RegNo,
+                    }).Distinct().AsEnumerable().ToList();
+        }
+
+
+        public StudentResultViewModel Get(int id)
+        {
+            return (from sr in _context.StudentResults
+                    where sr.Id == id
+                    join c in _context.Courses on sr.CourseId equals c.Id
+                    join srg in _context.StudentRegisters on sr.StudentRegId equals srg.Id
+                    join d in _context.Departments on srg.DepartmentId equals d.Id
+                    select new StudentResultViewModel
+                    {
+                        Id = sr.Id,
+                        StudentRegId = sr.StudentRegId,
+                        StudentRegNo = srg.RegNo,
+                        StudentName = srg.Name,
+                        StudentEmail = srg.Email,
+                        DepartmentCode = d.Code,
                         CourseId = c.Id,
                         CourseCode = c.Code,
                         CourseName = c.Name,
@@ -62,7 +97,7 @@ namespace OA.Repository.Repositories
                     }).AsNoTracking().SingleOrDefault();
         }
 
-      
+
 
         public void Insert(StudentResultViewModel model)
         {
@@ -102,7 +137,7 @@ namespace OA.Repository.Repositories
 
         public void Delete(int id)
         {
-            if (id! > 0)
+            if (id <= 0)
             {
                 throw new ArgumentNullException("StudentResult");
             }

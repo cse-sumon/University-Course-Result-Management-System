@@ -29,11 +29,26 @@ namespace WebApi.Controllers
         }
 
 
+        // GET: api/StudentResult/GetStudentResultByRegId/1
+        [HttpGet("GetStudentResultByRegId/{id}")]
+        public IActionResult GetStudentResultByRegId(int id)
+        {
+            return Ok(_studentResultService.GetStudentResultByRegId(id));
+        }
+
+        // GET: api/StudentResult/GetAllRegNo
+        [HttpGet("GetAllRegNo")]
+        public IActionResult GetAllRegNo()
+        {
+            return Ok(_studentResultService.GetAllRegNo());
+        }
+
+
         // GET: api/StudentResult/1
         [HttpGet("{id}")]
-        public IActionResult GetStudentResult(int studentRegId)
+        public IActionResult GetStudentResult(int id)
         {
-            var studentResults = _studentResultService.GetStudentResult(studentRegId);
+            var studentResults = _studentResultService.GetStudentResult(id);
             if (studentResults == null)
             {
                 return NotFound();

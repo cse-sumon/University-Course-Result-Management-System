@@ -1,4 +1,4 @@
-<div class="row alert alert-dark">
+<div class="row alert alert-success">
     <div class="col-sm-9">{{data.formTitle}}</div>
     <div class="col-sm-3">
         <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
@@ -27,13 +27,13 @@
 
             <div class="row">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Course</mat-label> 
+                    <mat-label>Course</mat-label>
                     <mat-select formControlName="courseId" required>
                         <mat-option *ngFor="let course of courseList" [value]="course.id">
                             {{course.code}}
                         </mat-option>
                     </mat-select>
-                    
+
                     <mat-error>This field is mandatory.</mat-error>
                 </mat-form-field>
             </div>

@@ -48,6 +48,8 @@ import { EnrollCourseComponent } from './components/enroll-course/enroll-course.
 import { AddEnrollCourseComponent } from './components/enroll-course/add-enroll-course/add-enroll-course.component';
 import { StudentResultComponent } from './components/student-result/student-result.component';
 import { AddStudentResultComponent } from './components/student-result/add-student-result/add-student-result.component';
+import { ViewResultComponent } from './components/student-result/view-result/view-result.component';
+import { UnassignAndUnallocateComponent } from './components/unassign-and-unallocate/unassign-and-unallocate.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { AddStudentResultComponent } from './components/student-result/add-stude
     EnrollCourseComponent,
     AddEnrollCourseComponent,
     StudentResultComponent,
-    AddStudentResultComponent
+    AddStudentResultComponent,
+    ViewResultComponent,
+    UnassignAndUnallocateComponent
 
   ],
   imports: [
@@ -126,6 +130,7 @@ import { AddStudentResultComponent } from './components/student-result/add-stude
     DetailsStudentRegisterComponent,
     AddAllocateClassRoomComponent,
     AddEnrollCourseComponent,
+    AddStudentResultComponent,
   ]
 })
 export class AppModule { }

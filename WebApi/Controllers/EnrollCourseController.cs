@@ -13,7 +13,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class EnrollCourseController : ControllerBase
     {
-        private readonly  IEnrollCourseService _enrollCourseService;
+        private readonly IEnrollCourseService _enrollCourseService;
 
         public EnrollCourseController(IEnrollCourseService enrollCourseService)
         {
@@ -26,6 +26,13 @@ namespace WebApi.Controllers
         public IActionResult GetAllAllocateClass()
         {
             return Ok(_enrollCourseService.GetAllEnrollCourse());
+        }
+
+        // GET: api/AllocateClassRoom
+        [HttpGet("GetEnrollCourseByRegId/{id}")]
+        public IActionResult GetEnrollCourseByRegId(int id)
+        {
+            return Ok(_enrollCourseService.GetEnrollCourseByRegId(id));
         }
 
 

@@ -16,6 +16,9 @@ import { StudentRegisterComponent } from './components/student-register/student-
 import { AllocateClassRoomComponent } from './components/allocate-class-room/allocate-class-room.component';
 import { ClassScheduleComponent } from './components/class-schedule/class-schedule.component';
 import { EnrollCourseComponent } from './components/enroll-course/enroll-course.component';
+import { StudentResultComponent } from './components/student-result/student-result.component';
+import { ViewResultComponent } from './components/student-result/view-result/view-result.component';
+import { UnassignAndUnallocateComponent } from './components/unassign-and-unallocate/unassign-and-unallocate.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -29,15 +32,18 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent,
     children:[
-      {path:'',component:HomeComponent},
-      {path:'course', component:CourseComponent},
-      {path:'department', component:DepartmentComponent},
-      {path:'teacher', component:TeacherComponent},
-      {path:'courseAssign', component:CourseAssignToTeacherComponent},
-      {path:'studentRegister', component:StudentRegisterComponent},
-      {path:'allocateClassRoom', component:AllocateClassRoomComponent},
-      {path:'viewClassSchedule', component:ClassScheduleComponent},
-      {path:'enrollCourse', component:EnrollCourseComponent},
+      {path:'',component:HomeComponent,canActivate:[AuthGuard]},
+      {path:'course', component:CourseComponent,canActivate:[AuthGuard]},
+      {path:'department', component:DepartmentComponent,canActivate:[AuthGuard]},
+      {path:'teacher', component:TeacherComponent,canActivate:[AuthGuard]},
+      {path:'courseAssign', component:CourseAssignToTeacherComponent,canActivate:[AuthGuard]},
+      {path:'studentRegister', component:StudentRegisterComponent,canActivate:[AuthGuard]},
+      {path:'allocateClassRoom', component:AllocateClassRoomComponent,canActivate:[AuthGuard]},
+      {path:'viewClassSchedule', component:ClassScheduleComponent,canActivate:[AuthGuard]},
+      {path:'enrollCourse', component:EnrollCourseComponent,canActivate:[AuthGuard]},
+      {path:'studentResult', component:StudentResultComponent,canActivate:[AuthGuard]},
+      {path:'viewResult', component:ViewResultComponent,canActivate:[AuthGuard]},
+      {path:'unAssign&unAllocate', component:UnassignAndUnallocateComponent,canActivate: [AuthGuard]},
 
     ]
   },

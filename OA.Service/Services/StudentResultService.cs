@@ -18,6 +18,16 @@ namespace OA.Service.Services
         public IEnumerable<StudentResultViewModel> GetAllStudentResults()
         {
             return _studentResultRepository.GetAll();
+        } 
+        
+        public IEnumerable<StudentResultViewModel> GetStudentResultByRegId(int id)
+        {
+            return _studentResultRepository.GetByRegId(id);
+        }
+        
+        public IEnumerable<StudentResultViewModel> GetAllRegNo()
+        {
+            return _studentResultRepository.GetAllRegNo();
         }
 
         public StudentResultViewModel GetStudentResult(int id)

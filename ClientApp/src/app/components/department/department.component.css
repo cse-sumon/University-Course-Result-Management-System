@@ -1,18 +1,21 @@
 /* Structure */
+
 table {
-  width: 100%;
+    width: 100%;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    width: 100%;
 }
 
 .mat-row:hover {
-  background-color: rgb(235, 235, 235);
+    background-color: rgb(235, 235, 235);
+    text-shadow: .3px .3px;
 }
-.mat-header-cell{
-background-color: rgb(187, 187, 187);
-color: black;
-font-size: 16px;
+
+.mat-header-cell {
+    background-color: rgb(132, 208, 230);
+    color: #011b79;
+    font-size: 16px;
 }

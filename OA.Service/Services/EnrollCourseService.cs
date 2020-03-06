@@ -18,6 +18,11 @@ namespace OA.Service.Services
         public IEnumerable<EnrollCourseViewModel> GetAllEnrollCourse()
         {
             return _enrollCourseRepository.GetAll();
+        } 
+        
+        public IEnumerable<EnrollCourseViewModel> GetEnrollCourseByRegId(int id)
+        {
+            return _enrollCourseRepository.GetEnrollCourseByRegId(id);
         }
 
 

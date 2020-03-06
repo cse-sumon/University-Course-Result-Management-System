@@ -70,6 +70,10 @@ export class AllocateClassRoomService {
     return this.http.delete(this.baseUrl + '/allocateClassRoom/' + id);
   }
 
+  unAllocateAllClassRooms(){
+    return this.http.get(this.baseUrl+'/AllocateClassRoom/UnAllocateAllClassRoom');
+  }
+
 
   populateForm(allocateClassRoomForm) {
     this.allocateClassRoomForm.setValue(allocateClassRoomForm);

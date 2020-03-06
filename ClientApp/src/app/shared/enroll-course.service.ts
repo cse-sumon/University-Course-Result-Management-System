@@ -47,6 +47,10 @@ export class EnrollCourseService {
   getAllEnrollCourses() {
     return this.http.get<EnrollCourse>(this.baseUrl + '/enrollCourse');
   }
+ 
+  getEnrollCourseByRegId(id) {
+    return this.http.get(this.baseUrl + '/enrollCourse/GetEnrollCourseByRegId/'+id);
+  }
 
   getEnrollCourse(id) {
     return this.http.get<EnrollCourse>(this.baseUrl + '/enrollCourse/' + id);
