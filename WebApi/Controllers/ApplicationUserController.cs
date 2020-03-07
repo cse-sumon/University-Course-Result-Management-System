@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("Register")]
+        [Authorize(Roles = "Admin")]
         //post: /api/ApplicationUser/Register
         public async Task<Object> PostApplicationUser(Register model)
         {
@@ -86,6 +88,27 @@ namespace WebApi.Controllers
             }
             else
                 return BadRequest(new { message = "UserName or Password is Incorrect." });
+
+        }
+
+
+        [HttpGet("GetUserProfile")]
+        [Authorize]
+        //Get: /api/UserProfile
+        public async Task<Object> GetUserProfile()
+        {
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return new
+            {
+                user.FullName,
+                user.UserName,
+                user.Email,
+                user.PhoneNumber,
+                user.CreatedBy,
+            };
 
         }
     }

@@ -19,6 +19,8 @@ import { EnrollCourseComponent } from './components/enroll-course/enroll-course.
 import { StudentResultComponent } from './components/student-result/student-result.component';
 import { ViewResultComponent } from './components/student-result/view-result/view-result.component';
 import { UnassignAndUnallocateComponent } from './components/unassign-and-unallocate/unassign-and-unallocate.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { ViewProfileComponent } from './components/user/view-profile/view-profile.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -26,13 +28,12 @@ const routes: Routes = [
     path: 'user', component: UserComponent,
     children:[
       {path:'login', component:LoginComponent},
-      { path: 'registration', component: RegistrationComponent},
     ]
   },
   {
-    path: 'dashboard', component: DashboardComponent,
+    path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard],
     children:[
-      {path:'',component:HomeComponent,canActivate:[AuthGuard]},
+      {path:'',component:HomeComponent},
       {path:'course', component:CourseComponent,canActivate:[AuthGuard]},
       {path:'department', component:DepartmentComponent,canActivate:[AuthGuard]},
       {path:'teacher', component:TeacherComponent,canActivate:[AuthGuard]},
@@ -44,6 +45,9 @@ const routes: Routes = [
       {path:'studentResult', component:StudentResultComponent,canActivate:[AuthGuard]},
       {path:'viewResult', component:ViewResultComponent,canActivate:[AuthGuard]},
       {path:'unAssign&unAllocate', component:UnassignAndUnallocateComponent,canActivate: [AuthGuard]},
+      { path: 'user', component: UserListComponent, canActivate:[AuthGuard]},
+      { path: 'viewProfile', component: ViewProfileComponent, canActivate:[AuthGuard]},
+
 
     ]
   },

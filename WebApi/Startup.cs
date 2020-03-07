@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,11 +41,11 @@ namespace WebApi
             services.AddCors();
             services.AddControllers();
             services.AddMvc();
-            services.AddAutoMapper(typeof(Startup));
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
 
             services.AddDbContext<OA.Repository.ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             //Dependency Register
             //Repository
@@ -95,6 +96,8 @@ namespace WebApi
             });
 
             //JWT Authentication
+         
+
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
             services.AddAuthentication(x =>
             {
@@ -127,31 +130,27 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            //must be maintain this midleware order
             app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+
+          
+
             app.UseCors(builder =>
              builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
             .AllowAnyHeader()
             .AllowAnyMethod()
-
             );
+
+            
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            //   app.UseCors(builder =>
-            //builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
-            //.AllowAnyHeader()
-            //.AllowAnyMethod()
-
-            //);
-            
         }
     }
 }

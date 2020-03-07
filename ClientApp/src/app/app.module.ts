@@ -50,6 +50,8 @@ import { StudentResultComponent } from './components/student-result/student-resu
 import { AddStudentResultComponent } from './components/student-result/add-student-result/add-student-result.component';
 import { ViewResultComponent } from './components/student-result/view-result/view-result.component';
 import { UnassignAndUnallocateComponent } from './components/unassign-and-unallocate/unassign-and-unallocate.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { ViewProfileComponent } from './components/user/view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { UnassignAndUnallocateComponent } from './components/unassign-and-unallo
     StudentResultComponent,
     AddStudentResultComponent,
     ViewResultComponent,
-    UnassignAndUnallocateComponent
+    UnassignAndUnallocateComponent,
+    UserListComponent,
+    ViewProfileComponent
 
   ],
   imports: [
@@ -131,6 +135,7 @@ import { UnassignAndUnallocateComponent } from './components/unassign-and-unallo
     AddAllocateClassRoomComponent,
     AddEnrollCourseComponent,
     AddStudentResultComponent,
+    RegistrationComponent,
   ]
 })
 export class AppModule { }

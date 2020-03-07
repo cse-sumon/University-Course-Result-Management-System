@@ -8,7 +8,7 @@ namespace OA.ViewModel
     public class StudentRegisterViewModel
     {
         public int Id { get; set; }
-        public string? RegNo { get; set; }
+        public string RegNo { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

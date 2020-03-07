@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OA.Service.Interfaces;
@@ -11,6 +12,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService _departmentService;
@@ -109,7 +111,7 @@ namespace WebApi.Controllers
                 _departmentService.SoftDeleteDepartment(departmentVM);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

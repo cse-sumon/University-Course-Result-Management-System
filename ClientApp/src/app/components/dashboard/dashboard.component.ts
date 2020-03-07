@@ -27,4 +27,10 @@ export class DashboardComponent {
     this.router.navigate(['/user/login']);
   }
 
+  viewProfile(){
+      this.router.navigate(['dashboard/viewProfile']);
+    }
+  
+  
+
 }

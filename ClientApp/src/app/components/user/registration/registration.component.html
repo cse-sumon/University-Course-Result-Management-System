@@ -1,4 +1,91 @@
-<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+<div class="row alert alert-success">
+  <div class="col-sm-9">{{data.formTitle}}</div>
+  <div class="col-sm-3">
+    <mat-icon class="float-right" [mat-dialog-close]="true" aria-hidden="false" aria-label="Example home icon"
+      (click)="onNoClick()">close
+    </mat-icon>
+  </div>
+</div>
+<form [formGroup]="service.formModel" class="normal-form" (submit)="onSubmit()">
+  <div class="row main" style="margin:auto">
+    <div class="left" style="float: left; width:47%;margin-right: 6%;">
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input formControlName="id" type="hidden">
+          <input formControlName="FullName" matInput placeholder="Full Name" required>
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input formControlName="UserName" matInput placeholder="User Name" required>
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input formControlName="Email" matInput placeholder="Email" required>
+          <mat-error *ngIf="service.formModel.controls['Email'].errors?.required">This field is mandatory.</mat-error>
+          <mat-error *ngIf="service.formModel.controls['Email'].errors?.email">Please enter a valid email</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input formControlName="PhoneNumber" matInput placeholder="Phone" required>
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="left" style="float:right; width:47%">
+
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="Role" required>
+            <mat-option *ngFor="let Role of Roles" [value]="Role">
+              {{Role}}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+      <div formGroupName="Passwords">
+
+        <div class="row">
+          <mat-form-field class="example-full-width">
+            <input type="password" formControlName="Password" matInput placeholder="Password" required>
+            <!-- <mat-error *ngIf="service.formModel.controls['Passwords.Password'].errors?.required">This field is mandatory.</mat-error>
+            <mat-error *ngIf="service.formModel.controls['Passwords.Password'].errors?.minlength">Minimum 4 characters required</mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="example-full-width">
+            <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password" required>
+            <!-- <mat-error *ngIf="service.formModel.controls['Passwords.ConfirmPassword'].errors?.required">This field is mandatory.</mat-error>
+          <mat-error *ngIf="service.formModel.controls['Passwords.ConfirmPassword'].errors?.passwordMismatch">Confirm Password does not match</mat-error> -->
+        
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+    <div class="button-row float-right">
+      <button mat-raised-button color="warn" type="reset" (click)="onClear()" style="margin-right: 5px;">Clear</button>
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="service.formModel.invalid">{{data.buttonName}}</button>
+    </div>
+
+</form>
+
+<!-- <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
     <div class="form-group required">
       <label>Username</label>
       <input class="form-control" formControlName="UserName">
@@ -32,4 +119,4 @@
         <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sign Up</button>
       </div>
     </div>
-  </form>
+  </form> -->

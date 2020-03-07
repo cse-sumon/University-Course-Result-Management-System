@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OA.Service.Interfaces;
@@ -11,6 +12,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherService _teacherService;
@@ -91,7 +93,7 @@ namespace WebApi.Controllers
                 _teacherService.UpdateTeacher(model);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

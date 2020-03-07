@@ -12,9 +12,12 @@ export class UserService {
   constructor(private fb:FormBuilder, private http:HttpClient) { }
 
   formModel = this.fb.group({
+    id:[null],
     UserName: ['', Validators.required],
-    Email: ['', Validators.email],
-    FullName: [''],
+    Email: ['', [Validators.required,Validators.email]],
+    FullName: ['',Validators.required],
+    PhoneNumber: [''],
+    Role: ['',Validators.required],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]
@@ -48,10 +51,6 @@ export class UserService {
   login(formData){
     return this.http.post(this.BaseURI+'/ApplicationUser/Login',formData);
   }
-
-  getUserProfile(){
-    return this.http.get(this.BaseURI +'/Semester');
-  }
   
   roleMatch(allowedRoles): boolean {
     var isMatch = false;
@@ -66,5 +65,11 @@ export class UserService {
     return isMatch;
   }
 
+
+  getUserProfile(){
+    return this.http.get(this.BaseURI +'/ApplicationUser/GetUserProfile');
+  }
+
+  
  
 }

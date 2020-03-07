@@ -1,0 +1,12 @@
+<h4 class="text-center text-primary">Users List</h4>
+<hr>
+<div class="row">
+  <div class="col-sm-10">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter User">
+    </mat-form-field>
+  </div>
+  <div class="col-sm-2">
+    <button mat-raised-button color="primary" (click)="onCreate()">Create New User</button>
+  </div>
+</div>

@@ -4,7 +4,7 @@
         <mat-toolbar>
             <mat-icon>dashboard</mat-icon>Dashboard
         </mat-toolbar>
-        <mat-nav-list>
+        <mat-nav-list style="margin-bottom: 30px;">
             <a mat-list-item routerLink="/">
                 <mat-icon>home</mat-icon>Home
             </a>
@@ -41,6 +41,9 @@
             <a mat-list-item routerLink="unAssign&unAllocate">
                 <mat-icon>delete_forever</mat-icon>Clear All
             </a>
+            <a mat-list-item routerLink="user">
+                <mat-icon>supervised_user_circle</mat-icon>Users
+            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -59,7 +62,7 @@
                     <i class="fas fa-user-circle" style="margin-right: 5px;"></i>Admin</mat-label>
                 <mat-select>
                     <mat-option>
-                        <button class="btn"> <i class="fas fa-id-card" style="margin-right: 6px;"></i>
+                        <button class="btn" (click)="viewProfile()"> <i class="fas fa-id-card" style="margin-right: 6px;"></i>
                             Profile</button><br>
                     </mat-option>
                     <mat-option>
@@ -73,7 +76,6 @@
         <!-- Add Content Here -->
         <div style="margin:5px">
             <router-outlet></router-outlet>
-
         </div>
 
     </mat-sidenav-content>
