@@ -12,7 +12,7 @@ import { RegistrationComponent } from '../registration/registration.component';
 export class UserListComponent implements OnInit {
 
   ELEMENT_DATA;
-  displayedColumns: string[] = ['id', 'fullName', 'userName','email', 'phoneNumber', 'createdBy', 'action'];
+  displayedColumns: string[] = ['fullName', 'userName','email', 'phoneNumber','createdBy', 'action'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -23,9 +23,32 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAllUsers();
  
   }
 
+  getAllUsers(){
+    this.userService.getAllUsers().subscribe(
+      res=>{
+        this.ELEMENT_DATA = <any>res;
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 
   onCreate(): void {
@@ -38,6 +61,20 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
+  }
+
+  onDelete(id) {
+    var result = confirm('Are you want to remove this ?')
+    if (result) {
+      this.userService.deleteUser(id).subscribe(
+        res => {
+          this.toastr.warning("Deleted Successfully");
+          this.ngOnInit();
+        },
+        error => {
+          console.log(error);
+        });
+    }
   }
 
 }

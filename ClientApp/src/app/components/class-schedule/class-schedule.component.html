@@ -1,1 +1,26 @@
-<h4 class="text-center text-primary">Class Schedule</h4>
+<h4 class="text-center text-primary">Class Schedule</h4><hr>
+<div class="row">
+    <div class="form-group col-sm-4" >
+      <select class="form-control" (change)="getClassScheduleByDeptId($event.target.value)">
+        <option [ngValue]="null" disabled>--Select Department--</option>
+        <option *ngFor="let department of departmentList" value={{department.id}}>{{department.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col-sm-2">Course Code</th>
+        <th scope="col-sm-3">Course Title</th>
+        <th scope="col-sm-7">Schedule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of scheduleInfo">
+        <td>{{schedule.courseCode}}</td>
+        <td>{{schedule.courseName}}</td>
+        <td>{{schedule.scheduleInfo}}</td>
+      </tr>
+    </tbody>
+  </table>

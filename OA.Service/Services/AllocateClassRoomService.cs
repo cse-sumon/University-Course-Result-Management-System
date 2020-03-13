@@ -20,6 +20,11 @@ namespace OA.Service.Services
         {
             return _allocateClassRoomRepository.GetAll();
         }
+        
+        public IEnumerable<ClassScheduleViewModel> GetClassSchedule(int deptId)
+        {
+            return _allocateClassRoomRepository.GetClassSchedule(deptId);
+        }
 
         public AllocateClassRoomViewModel GetAllocateClass(int id)
         {

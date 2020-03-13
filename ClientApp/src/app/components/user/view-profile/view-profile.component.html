@@ -1,7 +1,13 @@
-
-
-Full Name: <h4>{{userProfile.fullName}}</h4>
-User Name: <h4>{{userProfile.userName}}</h4>
-Email: <h4>{{userProfile.email}}</h4>
-Phone: <h4>{{userProfile.phoneNumber}}</h4>
-Created By: <h4>{{userProfile.createdBy}}</h4>
+<div class="row">
+    <div class="">
+        <img src="../../../../assets/img/profile.jpg" alt="" width="200px" height="200px">
+    </div>
+    <div class="list-group list-group-flush col-sm-6 float-right" style="padding-left: 0px;">
+        <ul>
+            <li class="list-group-item">Full Name: {{userProfile.fullName}}</li>
+            <li class="list-group-item">User Name: {{userProfile.userName}}</li>
+            <li class="list-group-item">Email: {{userProfile.email}}</li>
+            <li class="list-group-item">Phone: {{userProfile.phoneNumber}}</li>
+        </ul>
+    </div>
+</div>

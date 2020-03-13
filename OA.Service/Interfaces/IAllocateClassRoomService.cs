@@ -8,6 +8,7 @@ namespace OA.Service.Interfaces
     public interface IAllocateClassRoomService
     {
         IEnumerable<AllocateClassRoomViewModel> GetAllAllocateClass();
+        IEnumerable<ClassScheduleViewModel> GetClassSchedule(int deptId);
         AllocateClassRoomViewModel GetAllocateClass(int id);
         void InsertAllocateClass(AllocateClassRoomViewModel model);
         void UpdateAllocateClass(AllocateClassRoomViewModel model);

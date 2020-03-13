@@ -15,7 +15,14 @@ table {
 }
 
 .mat-header-cell {
-    background-color: rgb(132, 208, 230);
+    /* background-color: rgb(132, 208, 230); */
+    background-color:rgb(226, 229, 230);
     color: #011b79;
     font-size: 16px;
+}
+
+.list ul li{
+    list-style: none;
+    border: 1px solid silver;
+    padding: 3px;
 }

@@ -31,6 +31,14 @@ namespace WebApi.Controllers
         }
 
 
+        // GET: api/AllocateClassRoom/GetClassScheduleByDepartmentId/1
+        [HttpGet("GetClassScheduleByDepartmentId/{deptId}")]
+        public IActionResult GetClassScheduleByDepartmentId(int deptId)
+        {
+            return Ok(_allocateClassRoomService.GetClassSchedule(deptId));
+        }
+
+
         // GET: api/AllocateClassRoom/1
         [HttpGet("{id}")]
         public IActionResult GetAllocateClass(int id)

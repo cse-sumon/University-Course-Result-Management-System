@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OA.DBModel;
@@ -37,12 +38,16 @@ namespace WebApi.Controllers
         //post: /api/ApplicationUser/Register
         public async Task<Object> PostApplicationUser(Register model)
         {
-           
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+            var user = await _userManager.FindByIdAsync(userId);
+
             var applicationUser = new ApplicationUser()
             {
                 UserName = model.UserName,
                 Email = model.Email,
                 FullName = model.FullName,
+                CreatedBy = user.UserName,
+                PhoneNumber = model.PhoneNumber
             };
 
             try
@@ -98,7 +103,6 @@ namespace WebApi.Controllers
         public async Task<Object> GetUserProfile()
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
-
             var user = await _userManager.FindByIdAsync(userId);
 
             return new
@@ -111,5 +115,25 @@ namespace WebApi.Controllers
             };
 
         }
+
+        [HttpGet("GetAllUsers")]
+        [Authorize(Roles ="Admin")]
+        // Get: /api/ApplicationUser/GetAllUsers
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_userManager.Users.ToList());
+      
+        }
+
+
+        [HttpDelete("deleteUser/{id}")]
+        [Authorize(Roles = "Admin")]
+        //Delete: /api/ApplicationUser/DeleteUser
+        public ActionResult DeleteUser(string id)
+        {
+
+            return Ok();
+        }
+
     }
 }

@@ -8,6 +8,7 @@ namespace OA.Repository.Interfaces
     public interface IAllocateClassRoomRepository
     {
         IEnumerable<AllocateClassRoomViewModel> GetAll();
+        IEnumerable<ClassScheduleViewModel> GetClassSchedule(int deptId);
         AllocateClassRoomViewModel Get(int id);
         void Insert(AllocateClassRoomViewModel model);
         void Update(AllocateClassRoomViewModel model);

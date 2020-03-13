@@ -37,14 +37,30 @@ export class UserService {
     }
   }
 
+  initializeFormModel(){
+  this.formModel.setValue({
+    id:[null],
+    UserName: '',
+    Email: '',
+    FullName: '',
+    PhoneNumber: '',
+    Role: '',
+    Passwords: this.fb.group({
+      Password: '',
+      ConfirmPassword: ''
+    })
+  });
+  }
+
   register(){
     var body={
       UserName : this.formModel.value.UserName,
       Email : this.formModel.value.Email,
+      Role : this.formModel.value.Role,
+      PhoneNumber: this.formModel.value.PhoneNumber,
       FullName : this.formModel.value.FullName,
       Password : this.formModel.value.Passwords.Password
     };
-
     return this.http.post(this.BaseURI+'/ApplicationUser/Register',body);
   }
 
@@ -71,5 +87,12 @@ export class UserService {
   }
 
   
+  getAllUsers(){
+    return this.http.get(this.BaseURI +'/ApplicationUser/GetAllUsers');
+  }
+
+  deleteUser(id){
+    return this.http.delete(this.BaseURI +'/ApplicationUser/DeleteUser/'+id);
+  }
  
 }

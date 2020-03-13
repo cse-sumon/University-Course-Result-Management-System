@@ -35,6 +35,7 @@ Roles:string[]=['Admin','Teacher','Advisor','Student'];
       (res:any)=>{
         if(res.succeeded){
           this.service.formModel.reset();
+          this.service.initializeFormModel();
           this.toastr.success('New User Created!','Registration Successfull.');
         }
         else{
