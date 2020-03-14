@@ -44,9 +44,10 @@ const routes: Routes = [
       {path:'enrollCourse', component:EnrollCourseComponent,canActivate:[AuthGuard]},
       {path:'studentResult', component:StudentResultComponent,canActivate:[AuthGuard]},
       {path:'viewResult', component:ViewResultComponent,canActivate:[AuthGuard]},
-      {path:'unAssign&unAllocate', component:UnassignAndUnallocateComponent,canActivate: [AuthGuard]},
-      { path: 'user', component: UserListComponent, canActivate:[AuthGuard]},
+      {path:'unAssign&unAllocate', component:UnassignAndUnallocateComponent,canActivate: [AuthGuard],data:{permittedRoles:['Admin']}},
+      { path: 'userList', component: UserListComponent, canActivate:[AuthGuard],data:{permittedRoles:['Admin']}},
       { path: 'viewProfile', component: ViewProfileComponent, canActivate:[AuthGuard]},
+      {path:'forbidden',component:ForbiddenComponent},
 
 
     ]
@@ -54,7 +55,6 @@ const routes: Routes = [
 
   // ,canActivate: [AuthGuard]
   {path:'**',component:PageNotFoundComponent},
-  {path:'forbidden',component:ForbiddenComponent},
  
   
 ];

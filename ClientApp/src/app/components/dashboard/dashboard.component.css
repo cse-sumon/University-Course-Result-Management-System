@@ -45,3 +45,16 @@
     color: rgb(124, 175, 241);
     margin-right: 5px;
 }
+
+.mat-drawer-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+footer {
+    margin-top: 100px;
+    background-color: lightgrey;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+}

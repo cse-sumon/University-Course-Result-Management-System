@@ -135,6 +135,7 @@ namespace WebApi.Controllers
         // Get: api/CourseAssignToTeacher/UnAssignAllCourse
         [HttpGet]
         [Route("UnAssignAllCourse")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UnAssignAllCourse()
         {
             try

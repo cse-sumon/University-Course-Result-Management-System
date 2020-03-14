@@ -46,8 +46,6 @@ namespace OA.Repository.Repositories
                     where ac.DepartmentId == deptId
                     join c in _context.Courses on ac.CourseId equals c.Id
                     join r in _context.Rooms on ac.RoomId equals r.Id 
-                    //group ac by ac.CourseId into acg
-                   
                     select new ClassScheduleViewModel
                     {
                         CourseCode = c.Code,
@@ -55,29 +53,6 @@ namespace OA.Repository.Repositories
                         ScheduleInfo = "Room No:" + r.RoomNumner + ", " + ac.Day + ", " + DateTime.Parse(ac.From).ToString("hh:mm tt") + " - " + DateTime.Parse(ac.To).ToString("hh:mm tt")
                     }).AsEnumerable().ToList();
 
-            //return (from ac in _context.AllocateClassRooms
-            //        where ac.DepartmentId == deptId
-            //        join c in _context.Courses on ac.CourseId equals c.Id
-            //        join r in _context.Rooms on ac.RoomId equals r.Id
-            //        group new { ac.CourseId }
-            //            by new
-            //            {
-            //                ac.CourseId,
-            //                ac.RoomId,
-            //                ac.Day,
-            //                ac.From,
-            //                ac.To,
-            //                c.Code,
-            //                c.Name,
-            //                r.RoomNumner
-
-            //            } into g
-            //        select new ClassScheduleViewModel
-            //        {
-            //            CourseCode = g.Key.Code,
-            //            CourseName = g.Key.Name,
-            //            ScheduleInfo = "Room No:" + g.Key.RoomNumner + ", " + g.Key.Day + ", " + DateTime.Parse(g.Key.From).ToString("hh:mm tt") + " - " + DateTime.Parse(g.Key.To).ToString("hh:mm tt")
-            //        }).AsEnumerable().ToList();
         }
 
 

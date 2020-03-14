@@ -41,7 +41,7 @@
             <a mat-list-item routerLink="unAssign&unAllocate">
                 <mat-icon>delete_forever</mat-icon>Clear All
             </a>
-            <a mat-list-item routerLink="user">
+            <a mat-list-item routerLink="userList">
                 <mat-icon>supervised_user_circle</mat-icon>Users
             </a>
         </mat-nav-list>
@@ -56,10 +56,10 @@
             <span><i class="fas fa-graduation-cap text-warning" style="margin-right: 5px;"></i>UCRMS</span>
             <span class="example-spacer"></span>
 
-            <mat-form-field style="width: 100px;">
+            <mat-form-field style="width: 130px;">
 
                 <mat-label style=" color: white; font-size: 16px;">
-                    <i class="fas fa-user-circle" style="margin-right: 5px;"></i>Admin</mat-label>
+                    <i class="fas fa-user-circle" style="margin-right: 10px;"></i>{{user.userName}}</mat-label>
                 <mat-select>
                     <mat-option>
                         <button class="btn" (click)="viewProfile()"> <i class="fas fa-id-card" style="margin-right: 6px;"></i>
@@ -77,6 +77,7 @@
         <div style="margin:5px">
             <router-outlet></router-outlet>
         </div>
-
+        <footer class="text-center">&copy;Sumon-2020</footer>
     </mat-sidenav-content>
+
 </mat-sidenav-container>

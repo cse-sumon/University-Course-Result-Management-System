@@ -18,19 +18,36 @@ export class DashboardComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, 
-    private service: UserService, 
-    private router: Router) {}
+    user:any='';
+
+  constructor(private breakpointObserver: BreakpointObserver,
+    private service: UserService,
+    private router: Router) { }
+
+    ngOnInit() {
+      this.getUserName();
+    }
 
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }
 
-  viewProfile(){
-      this.router.navigate(['dashboard/viewProfile']);
-    }
-  
-  
+  viewProfile() {
+    this.router.navigate(['dashboard/viewProfile']);
+  }
+
+
+  getUserName(){
+    this.service.getUserProfile().subscribe(
+      res=>{
+        this.user=res;
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
 
 }

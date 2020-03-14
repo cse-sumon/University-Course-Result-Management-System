@@ -125,6 +125,7 @@ namespace WebApi.Controllers
         //Get: api/AllocateClassRoom/UnAllocateAllClassRoom
         [HttpGet]
         [Route("UnAllocateAllClassRoom")]
+        [Authorize(Roles ="Admin")]
         public IActionResult UnAllocateAllClassRoom()
         {
             try
